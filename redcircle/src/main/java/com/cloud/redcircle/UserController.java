@@ -31,8 +31,8 @@ public class UserController {
 		List<HashMap<String, String>> friendArray = (List<HashMap<String, String>>) friendArrayMap.get("friendArrayMap");
 		Map<String, String> meInfo = (Map<String, String>) friendArrayMap.get("meInfo");
 		List<Object[]> newFriendArray = new ArrayList<Object[]>();
-		
-		
+		Object[] meArray = {meInfo.get("me_phone"),meInfo.get("me_phone")};
+		newFriendArray.add(meArray);
 		for (Iterator<HashMap<String, String>> iterator = friendArray.iterator(); iterator.hasNext();) {
 			HashMap<String, String> object = (HashMap<String, String>) iterator.next();
 			object.remove("verify_code_text");
