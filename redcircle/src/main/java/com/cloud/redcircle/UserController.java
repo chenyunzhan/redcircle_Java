@@ -70,7 +70,38 @@ public class UserController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
-    public String login(@RequestBody HashMap<String, Object> mePhoneMap) {
+    public String login(@RequestBody HashMap<String, Object> meMap) {
+		
+		
+		String mePhone = (String) meMap.get("mePhone");
+		
+		String paramKey = null;
+		String paramValue = null;
+		if (meMap.get("sex") != null) {
+			paramKey = "sex";
+			paramValue = (String) meMap.get("sex");
+		} else if (meMap.get("name") != null) {
+			paramKey = "name";
+			paramValue = (String) meMap.get("name");
+		}
+
+		
+		int[] results = jdbcTemplate.batchUpdate("update t_red_user set " + paramKey + " = " + paramValue + " where me_phone = " + mePhone);
+
+        if (results.length >0) {
+    		return "{\"success\":true, \"msg\":\"修改成功\"}";
+
+        } else {
+        	return "{\"success\":false, \"msg\":\"修改失败\"}";
+        }
+		
+
+    }
+	
+	
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	@ResponseBody
+    public User modify(@RequestBody HashMap<String, Object> mePhoneMap) {
 		
 		
 		String mePhone = (String) mePhoneMap.get("mePhone");
@@ -81,12 +112,11 @@ public class UserController {
 //                (rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))
 //        ).forEach(customer -> log.info(customer.toString()));
 		
-		List<User> results  = jdbcTemplate.query("select me_phone from t_red_user where me_phone = ?", new Object[] { mePhone }, (rs,rowNum)-> new User(null, null, null, null));
-			
-		if (results.size() > 0) {
-			return "{\"success\":true, \"msg\":\"登录成功\"}";
-		}
-		return "{\"success\":false, \"msg\":\"登录失败\"}";
+		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
+		
+		return results.get(0);
+		
+
     }
 	
 	
