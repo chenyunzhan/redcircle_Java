@@ -68,7 +68,7 @@ public class UserController {
 	
 	
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	@ResponseBody
     public String login(@RequestBody HashMap<String, Object> meMap) {
 		
@@ -86,7 +86,7 @@ public class UserController {
 		}
 
 		
-		int[] results = jdbcTemplate.batchUpdate("update t_red_user set " + paramKey + " = " + paramValue + " where me_phone = " + mePhone);
+		int[] results = jdbcTemplate.batchUpdate("update t_red_user set " + paramKey + " = '" + paramValue + "' where me_phone = " + mePhone);
 
         if (results.length >0) {
     		return "{\"success\":true, \"msg\":\"修改成功\"}";
@@ -99,7 +99,7 @@ public class UserController {
     }
 	
 	
-	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
     public User modify(@RequestBody HashMap<String, Object> mePhoneMap) {
 		
