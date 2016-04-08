@@ -130,7 +130,7 @@ public class UserController {
 		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ?", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
 		for (Iterator<User> iterator = results.iterator(); iterator.hasNext();) {
 			User user = (User) iterator.next();
-			List<User> ffriend  = jdbcTemplate.query("select * from t_red_user where me_phone = ?", new Object[] { user.getFriendPhone() }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
+			List<User> ffriend  = jdbcTemplate.query("select distinct a.friend_phone, b.name from t_red_user a left join t_red_user b on a.friend_phone = b.me_phone where a.me_phone = ?", new Object[] { user.getFriendPhone() }, (rs,rowNum)-> new User(rs.getString("friend_phone"),null,null,rs.getString("name")));
 			Map<String,Object> friendMap = new HashMap<String,Object>();
 			friendMap.put("friend", user);
 			friendMap.put("ffriend", ffriend);

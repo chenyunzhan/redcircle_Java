@@ -22,6 +22,12 @@ public class MessageController {
 	String key = "qf3d5gbj3ufqh";//替换成您的appkey
 	String secret = "Aqccu1B5d4f";//替换成匹配上面key的secret
 	
+	
+	public static void main(String[] args) {
+		MessageController m = new MessageController();
+		m.syncMessage();
+	}
+	
 	@RequestMapping(value="/getRongCloudToken")
 	@ResponseBody
     public String getFriends(@RequestParam HashMap<String, Object> meMap) {
@@ -38,5 +44,19 @@ public class MessageController {
 		}
 		System.out.println("gettoken=" + result);
 		return result.toString();
+	}
+	
+	
+	
+	public void syncMessage() {
+		SdkHttpResult result = null;
+		try {
+			result = ApiHttpClient.getMessageHistoryUrl(key, secret, "2016040721",
+					FormatType.json);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("getMessageHistoryUrl=" + result);
 	}
 }
