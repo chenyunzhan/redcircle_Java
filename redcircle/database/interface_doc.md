@@ -7,9 +7,37 @@
 
 [用户登录接口](#gap_lock)
 
-*aa
-*aa*aa*aa*aa
-*aa
+* Toggle live preview: Shift + Cmd + I
+* Toggle Words Counter: Shift + Cmd + W
+* Toggle Transparent: Shift + Cmd + T
+* Toggle Floating: Shift + Cmd + F
+* Left/Right = 1/1: Cmd + 0
+* Left/Right = 3/1: Cmd + +
+* Left/Right = 1/3: Cmd + -
+* Toggle Writing orientation: Cmd + L
+* Toggle fullscreen: Control + Cmd + F
+* * Toggle live preview: Shift + Cmd + I
+* Toggle Words Counter: Shift + Cmd + W
+* Toggle Transparent: Shift + Cmd + T
+* Toggle Floating: Shift + Cmd + F
+* Left/Right = 1/1: Cmd + 0
+* Left/Right = 3/1: Cmd + +
+* Left/Right = 1/3: Cmd + -
+* Toggle Writing orientation: Cmd + L
+* Toggle fullscreen: Control + Cmd + F
+* * Toggle live preview: Shift + Cmd + I
+* Toggle Words Counter: Shift + Cmd + W
+* Toggle Transparent: Shift + Cmd + T
+* Toggle Floating: Shift + Cmd + F
+* Left/Right = 1/1: Cmd + 0
+* Left/Right = 3/1: Cmd + +
+* Left/Right = 1/3: Cmd + -
+* Toggle Writing orientation: Cmd + L
+* Toggle fullscreen: Control + Cmd + F
+* 
+
+
+
 ### <a name="gap_lock">gap lock 间隙锁</a>
 用户登录接口：
 
