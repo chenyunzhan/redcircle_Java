@@ -35,7 +35,7 @@ public class MessageService {
 	String secret = "Aqccu1B5d4f";//替换成匹配上面key的secret
 	
 	String fileName = "test.zip";
-	String savePath = "/Users/cloud/Desktop/";
+	String savePath = "/Users/zhan/Desktop/";
 
 	
 	@Autowired
@@ -62,7 +62,7 @@ public class MessageService {
 				try {
 					List<Object[]> messageArray = this.readZipFile(savePath+fileName);
 					System.out.println(messageArray.size());
-		            int[] results = jdbcTemplate.batchUpdate("INSERT INTO t_red_user(friend_phone, me_phone) VALUES (?, ?)", messageArray);
+		            int[] results = jdbcTemplate.batchUpdate("INSERT INTO t_red_message(appId, fromUserId, targetId, targetType, GroupId, classname, content ,dateTime ,msgUID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", messageArray);
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -160,7 +160,7 @@ public class MessageService {
                     while ((line = br.readLine()) != null) {  
                         System.out.println(line); 
             			HashMap messageMap = (HashMap) GsonUtil.fromJson(line.substring(19), HashMap.class);
-            			Object[] message = {messageMap.get("appId"),messageMap.get("fromUserId"),messageMap.get("targetId"),messageMap.get("targetType"),messageMap.get("GroupId"),messageMap.get("classname"),messageMap.get("content"),messageMap.get("dateTime"),messageMap.get("msgUID")};
+            			Object[] message = {messageMap.get("appId"),messageMap.get("fromUserId"),messageMap.get("targetId"),messageMap.get("targetType"),messageMap.get("GroupId"),messageMap.get("classname"),messageMap.get("content").toString(),messageMap.get("dateTime"),messageMap.get("msgUID")};
             			messageArray.add(message);
                     }  
                     br.close();  
