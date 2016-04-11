@@ -22,9 +22,15 @@
 friendArrayMap | Content Cell  | Content Cell
 meInfo | Content Cell  | Content Cell
 **示例:**
-```
+```json
 {meInfo={me_phone=18706734109}, friendArrayMap=[{verify_code_text=, phone_text=11111111}, {verify_code_text=, phone_text=22222222}]}
 ```
+
+```json
+[{"ffriend":[],"friend":{"mePhone":"18706734109","friendPhone":"111","sex":"","name":"陈云展"}},{"ffriend":[{"mePhone":"18706734109","friendPhone":null,"sex":null,"name":"陈云展"},{"mePhone":"111","friendPhone":null,"sex":null,"name":""},{"mePhone":"222","friendPhone":null,"sex":null,"name":""}],"friend":{"mePhone":"18706734109","friendPhone":"18706734109","sex":"","name":"陈云展"}},{"ffriend":[],"friend":{"mePhone":"18706734109","friendPhone":"222","sex":"","name":"陈云展"}}]
+```
+
+
 
 <a name="login"> 用户登录接口</a>：
 
