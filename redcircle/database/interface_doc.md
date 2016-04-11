@@ -5,41 +5,43 @@
 
 **红圏**，是一款专注于真实性社交APP，其最大的特点在于用户的**可靠性**、**动态性**。只需要一步注册，后面的事全由我们来完成，并且可以精准的给于用户分类。我们没有发明一个东西，只是将最真实的生活体现在**红圈**中。我们宗旨的是：***让您的真实生活更精彩，而不是让你沉迷于虚似世界中***
 
-[用户登录接口](#gap_lock)
-
-* Toggle live preview: Shift + Cmd + I
-* Toggle Words Counter: Shift + Cmd + W
-* Toggle Transparent: Shift + Cmd + T
-* Toggle Floating: Shift + Cmd + F
-* Left/Right = 1/1: Cmd + 0
-* Left/Right = 3/1: Cmd + +
-* Left/Right = 1/3: Cmd + -
-* Toggle Writing orientation: Cmd + L
-* Toggle fullscreen: Control + Cmd + F
-* * Toggle live preview: Shift + Cmd + I
-* Toggle Words Counter: Shift + Cmd + W
-* Toggle Transparent: Shift + Cmd + T
-* Toggle Floating: Shift + Cmd + F
-* Left/Right = 1/1: Cmd + 0
-* Left/Right = 3/1: Cmd + +
-* Left/Right = 1/3: Cmd + -
-* Toggle Writing orientation: Cmd + L
-* Toggle fullscreen: Control + Cmd + F
-* * Toggle live preview: Shift + Cmd + I
-* Toggle Words Counter: Shift + Cmd + W
-* Toggle Transparent: Shift + Cmd + T
-* Toggle Floating: Shift + Cmd + F
-* Left/Right = 1/1: Cmd + 0
-* Left/Right = 3/1: Cmd + +
-* Left/Right = 1/3: Cmd + -
-* Toggle Writing orientation: Cmd + L
-* Toggle fullscreen: Control + Cmd + F
-* 
+[用户注册接口](#register)  
+[用户登录接口](#login)  
+[获取朋友接口](#getFriends)  
+[修改用户接口](#modify)
 
 
+<a name="register"> 用户注册接口</a>：
 
-### <a name="gap_lock">gap lock 间隙锁</a>
-用户登录接口：
+**请求url:**　　/register  
+**请求方式:** 　post
+
+参数名 | 参数类型 | 参数说明
+------------ | ------------- | ------------
+Content Cell | Content Cell  | Content Cell
+Content Cell | Content Cell  | Content Cell
+
+<a name="login"> 用户登录接口</a>：
+
+**请求url:**　　/register  
+**请求方式:** 　post
+
+参数名 | 参数类型 | 参数说明
+------------ | ------------- | ------------
+Content Cell | Content Cell  | Content Cell
+Content Cell | Content Cell  | Content Cell
+
+<a name="getFriends"> 获取朋友接口</a>：
+
+**请求url:**　　/register  
+**请求方式:** 　post
+
+参数名 | 参数类型 | 参数说明
+------------ | ------------- | ------------
+Content Cell | Content Cell  | Content Cell
+Content Cell | Content Cell  | Content Cell
+
+<a name="modify"> 修改用户接口</a>：
 
 **请求url:**　　/register  
 **请求方式:** 　post
