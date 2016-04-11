@@ -112,9 +112,18 @@ public class UserController {
 //                (rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))
 //        ).forEach(customer -> log.info(customer.toString()));
 		
-		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
+		List<Map<String, Object>> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone });
+		List<User> userList = new ArrayList<User>();
+		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
+			Map<String, Object> map = (Map<String, Object>) iterator.next();
+			userList.add(new User(map.get("me_phone").toString(),map.get("friend_phone").toString(),map.get("sex").toString(),map.get("name").toString()));
+		}
 		
-		return results.get(0);
+//		List<String> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, java.lang.String.class);
+		
+//		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
+		
+		return userList.get(0);
 		
 
     }
@@ -127,10 +136,27 @@ public class UserController {
 		
 		
 		List<Object> ffriendList = new ArrayList<Object>();
-		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ?", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
-		for (Iterator<User> iterator = results.iterator(); iterator.hasNext();) {
+//		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ?", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
+		
+		List<Map<String, Object>> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ?", new Object[] { mePhone });
+		List<User> userList = new ArrayList<User>();
+		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
+			Map<String, Object> map = (Map<String, Object>) iterator.next();
+			userList.add(new User(map.get("me_phone").toString(),map.get("friend_phone").toString(),map.get("sex").toString(),map.get("name").toString()));
+		}
+		
+		
+		for (Iterator<User> iterator = userList.iterator(); iterator.hasNext();) {
 			User user = (User) iterator.next();
-			List<User> ffriend  = jdbcTemplate.query("select distinct a.friend_phone, b.name from t_red_user a left join t_red_user b on a.friend_phone = b.me_phone where a.me_phone = ?", new Object[] { user.getFriendPhone() }, (rs,rowNum)-> new User(rs.getString("friend_phone"),null,null,rs.getString("name")));
+			
+			
+			List<Map<String, Object>> ffResults = jdbcTemplate.queryForList("select distinct a.friend_phone, b.name from t_red_user a left join t_red_user b on a.friend_phone = b.me_phone where a.me_phone = ?", new Object[] { user.getFriendPhone() });
+			List<User> ffriend = new ArrayList<User>();
+			for (Iterator<Map<String, Object>> iterator1 = ffResults.iterator(); iterator1.hasNext();) {
+				Map<String, Object> map = (Map<String, Object>) iterator1.next();
+				ffriend.add(new User(map.get("friend_phone").toString(),null,null,map.get("name") == null ? "" : map.get("name").toString()));
+			}
+//			List<User> ffriend  = jdbcTemplate.query("select distinct a.friend_phone, b.name from t_red_user a left join t_red_user b on a.friend_phone = b.me_phone where a.me_phone = ?", new Object[] { user.getFriendPhone() }, (rs,rowNum)-> new User(rs.getString("friend_phone"),null,null,rs.getString("name")));
 			Map<String,Object> friendMap = new HashMap<String,Object>();
 			friendMap.put("friend", user);
 			friendMap.put("ffriend", ffriend);
