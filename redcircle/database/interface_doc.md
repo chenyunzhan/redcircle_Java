@@ -1,46 +1,123 @@
-![mahua](mahua-logo.jpg)
-##MaHua是什么?
-一个在线编辑markdown文档的编辑器
+#红圏客户端接口文档
 
-向Mac下优秀的markdown编辑器mou致敬
 
-##MaHua有哪些功能？
+##概述
 
-* 方便的`导入导出`功能
-    *  直接把一个markdown的文本文件拖放到当前这个页面就可以了
-    *  导出为一个html格式的文件，样式一点也不会丢失
-* 编辑和预览`同步滚动`，所见即所得（右上角设置）
-* `VIM快捷键`支持，方便vim党们快速的操作 （右上角设置）
-* 强大的`自定义CSS`功能，方便定制自己的展示
-* 有数量也有质量的`主题`,编辑器和预览区域
-* 完美兼容`Github`的markdown语法
-* 预览区域`代码高亮`
-* 所有选项自动记忆
+**红圏**，是一款专注于真实性社交APP，其最大的特点在于用户的**可靠性**、**动态性**。只需要一步注册，后面的事全由我们来完成，并且可以精准的给于用户分类。我们没有发明一个东西，只是将最真实的生活体现在**红圈**中。我们宗旨的是：***让您的真实生活更精彩，而不是让你沉迷于虚似世界中***。***让您真正的驾叹互联网，而不是被互联主宰***
 
-##有问题反馈
-在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流
+[接口整体说明](#summary)  
+[用户注册接口](#register)  
+[用户登录接口](#login)  
+[获取朋友接口](#getFriends)  
+[修改用户接口](#modify)
 
-* 邮件(dev.hubo#gmail.com, 把#换成@)
-* QQ: 287759234
-* weibo: [@草依山](http://weibo.com/ihubo)
-* twitter: [@ihubo](http://twitter.com/ihubo)
 
-##捐助开发者
-在兴趣的驱动下,写一个`免费`的东西，有欣喜，也还有汗水，希望你喜欢我的作品，同时也能支持一下。
-当然，有钱捧个钱场（右上角的爱心标志，支持支付宝和PayPal捐助），没钱捧个人场，谢谢各位。
+<a name="summary">接口整体说明</a>
+* 数据库名: redcircle  用户名: root  密码:chenyunzhan
+* 数据库脚本参见同目录sql文件
+* 启动服务: java -jar redcircle-0.0.1-SNAPSHOT.war
+* 接口基础地址: "http://localhost:8080"
+* 无论是get还是post传递的参数都是一个map类型的数据
 
-##感激
-感谢以下的项目,排名不分先后
 
-* [mou](http://mouapp.com/) 
-* [ace](http://ace.ajax.org/)
-* [jquery](http://jquery.com)
+<a name="register"> 用户注册接口</a>：
 
-##关于作者
+**请求url:**　　/register  
+**请求方式:** 　post
 
-```javascript
-  var ihubo = {
-    nickName  : "草依山",
-    site : "http://jser.me"
-  }
+
+参数名 | 参数类型 | 参数说明
+------------ | ------------- | ------------
+friendArrayMap | map数组  | 该用户的朋友的数组
+meInfo | map对象  | 该用户对象，对象只包含一个me_phone属性
+**示例:**
+```
+{meInfo={me_phone=18706734109}, friendArrayMap=[{verify_code_text=, phone_text=11111111}, {verify_code_text=, phone_text=22222222}]}
+```
+
+<a name="login"> 用户登录接口</a>：
+
+**请求url:**　　/login  
+**请求方式:** 　post
+
+参数名 | 参数类型 | 参数说明
+------------ | ------------- | ------------
+mePhone | 字符串  | 该用户对象，对象只包含一个mePhone属性
+**示例**
+```
+{mePhone=18706734109}
+```
+<a name="getFriends"> 获取朋友接口</a>：
+
+**请求url:**　　/getFriends  
+**请求方式:** 　get
+
+参数名 | 参数类型 | 参数说明
+------------ | ------------- | ------------
+mePhone | 字符串  | 该用户对象，对象只包含一个mePhone属性
+**示例**
+```json
+[
+    {
+        "ffriend": [],
+        "friend": {
+            "mePhone": "18706734109",
+            "friendPhone": "111",
+            "sex": "",
+            "name": "陈云展"
+        }
+    },
+    {
+        "ffriend": [
+            {
+                "mePhone": "18706734109",
+                "friendPhone": null,
+                "sex": null,
+                "name": "陈云展"
+            },
+            {
+                "mePhone": "111",
+                "friendPhone": null,
+                "sex": null,
+                "name": ""
+            },
+            {
+                "mePhone": "222",
+                "friendPhone": null,
+                "sex": null,
+                "name": ""
+            }
+        ],
+        "friend": {
+            "mePhone": "18706734109",
+            "friendPhone": "18706734109",
+            "sex": "",
+            "name": "陈云展"
+        }
+    },
+    {
+        "ffriend": [],
+        "friend": {
+            "mePhone": "18706734109",
+            "friendPhone": "222",
+            "sex": "",
+            "name": "陈云展"
+        }
+    }
+]
+```
+
+<a name="modify"> 修改用户接口</a>：
+
+**请求url:**　　/modify  
+**请求方式:** 　post
+
+参数名 | 参数类型 | 参数说明
+------------ | ------------- | ------------
+mePhone | 字符串  | 必传，用户手机号
+sex | 字符串  | 可选参数，修改性别时传
+name | 字符串  | 可选参数，修改姓名时传
+**示例**
+```
+{name=New name, mePhone=18706734109}
 ```
