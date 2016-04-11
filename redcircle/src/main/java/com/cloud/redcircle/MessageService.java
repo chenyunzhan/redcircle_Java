@@ -11,9 +11,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -29,25 +34,40 @@ import io.rong.util.GsonUtil;
 
 
 @Service
-public class MessageService {
+public class MessageService extends TimerTask{
 	
 	String key = "qf3d5gbj3ufqh";//替换成您的appkey
 	String secret = "Aqccu1B5d4f";//替换成匹配上面key的secret
 	
 	String fileName = "test.zip";
-	String savePath = "/Users/zhan/Desktop/";
+	String savePath = "/Users/cloud/Desktop/";
 
 	
 	@Autowired
     JdbcTemplate jdbcTemplate;
 	
+	public void setSyncMessageTimer() {
+		Timer timer = new Timer(); 
+	     timer.schedule(this, 5 * 1000, 60 * 60 * 1000);
+	}
 	
 	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		this.syncMessage();
+	} 
 	
 	public void syncMessage() {
 		SdkHttpResult result = null;
+		Date date=new Date();
+		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 2);
+		DateFormat format=new SimpleDateFormat("yyyyMMddHH");
+		String currentHours=format.format(twoHoursDate);
+		
+		
 		try {
-			result = ApiHttpClient.getMessageHistoryUrl(key, secret, "2016040913",
+			result = ApiHttpClient.getMessageHistoryUrl(key, secret, currentHours,
 					FormatType.json);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -57,6 +77,9 @@ public class MessageService {
 		if (result.getHttpCode() == 200) {
 			String resultStr = result.getResult();
 			HashMap resultMap = (HashMap) GsonUtil.fromJson(resultStr, HashMap.class);
+			if(resultMap.get("url").toString().length() == 0) {
+				return;
+			}
 	        try {
 				this.downLoadFromUrl(resultMap.get("url").toString(), fileName, savePath);
 				try {
@@ -88,7 +111,8 @@ public class MessageService {
      * @param savePath 
      * @throws IOException 
      */  
-    public void  downLoadFromUrl(String urlStr,String fileName,String savePath) throws IOException{  
+    public void  downLoadFromUrl(String urlStr,String fileName,String savePath) throws IOException{
+
         URL url = new URL(urlStr);    
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();    
                 //设置超时间为3秒  
@@ -171,5 +195,8 @@ public class MessageService {
         zin.closeEntry();  
 		return messageArray;
 
-    }  
+    }
+
+
+ 
 }

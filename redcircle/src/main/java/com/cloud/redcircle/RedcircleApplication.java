@@ -23,6 +23,6 @@ public class RedcircleApplication implements CommandLineRunner {
 	
     @Override
     public void run(String... strings) throws Exception {
-		messageService.syncMessage();
+		messageService.setSyncMessageTimer();
     }
 }
