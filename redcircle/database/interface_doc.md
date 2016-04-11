@@ -23,20 +23,7 @@ friendArrayMap | Content Cell  | Content Cell
 meInfo | Content Cell  | Content Cell
 **示例:**
 ```
-{
-	&quot;id&quot;: &quot;ID&quot;,
-	&quot;icon&quot;: &quot;图标，FontAwesome图标编号或Webplat内图标ID&quot;,
-	&quot;iconclor&quot;: &quot;图标颜色，不是预制颜色值的话就是HTML RGB颜色值&quot;,
-	&quot;title&quot;: &quot;名称&quot;,
-	&quot;desc&quot;: &quot;描述&quot;,
-	&quot;type&quot;: &quot;tap/one&quot;,
-	&quot;badgtype&quot;: &quot;badge标示类型：badge表示红圈数字，需要被求和显示在上层菜单和App图标上；num表示在标题后面显示数字；red表示小红点；new表示加new斜幅；hot表示加hot斜幅；none表示无&quot;,
-	&quot;badge&quot;: &quot;badge标示数字，小红点时1/0代表是否显示&quot;,
-	&quot;url&quot;: &quot;功能链接，内置功能或服务器功能接口URL&quot;
-	&quot;method&quot;: &quot;url的请求方法：get/post/delete/put等HTTP动词&quot;,
-	&quot;params&quot;: {&quot;传入参数名1&quot;:&quot;取值字段1&quot;, &quot;传入参数名2&quot;:&quot;取值字段2&quot;},
-	&quot;present&quot;: &quot;界面视图出现方式：1当前Navigator栈 2新建Navigator栈&quot;
-}
+{meInfo={me_phone=18706734109}, friendArrayMap=[{verify_code_text=, phone_text=11111111}, {verify_code_text=, phone_text=22222222}]}
 ```
 
 <a name="login"> 用户登录接口</a>：
