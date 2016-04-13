@@ -39,8 +39,8 @@ public class MessageService extends TimerTask{
 	String key = "qf3d5gbj3ufqh";//替换成您的appkey
 	String secret = "Aqccu1B5d4f";//替换成匹配上面key的secret
 	
-	String fileName = "test.zip";
-	String savePath = "/Users/cloud/Desktop/";
+	String fileName = "message_log.zip";
+	String savePath = System.getProperty("user.dir") + "/database/";
 
 	
 	@Autowired
@@ -48,7 +48,7 @@ public class MessageService extends TimerTask{
 	
 	public void setSyncMessageTimer() {
 		Timer timer = new Timer(); 
-	     timer.schedule(this, 5 * 1000, 60 * 60 * 1000);
+	     timer.schedule(this, 60 * 1000, 60 * 60 * 1000);
 	}
 	
 	
@@ -61,7 +61,7 @@ public class MessageService extends TimerTask{
 	public void syncMessage() {
 		SdkHttpResult result = null;
 		Date date=new Date();
-		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 2);
+		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 3);
 		DateFormat format=new SimpleDateFormat("yyyyMMddHH");
 		String currentHours=format.format(twoHoursDate);
 		
@@ -184,7 +184,8 @@ public class MessageService extends TimerTask{
                     while ((line = br.readLine()) != null) {  
                         System.out.println(line); 
             			HashMap messageMap = (HashMap) GsonUtil.fromJson(line.substring(19), HashMap.class);
-            			Object[] message = {messageMap.get("appId"),messageMap.get("fromUserId"),messageMap.get("targetId"),messageMap.get("targetType"),messageMap.get("GroupId"),messageMap.get("classname"),messageMap.get("content").toString(),messageMap.get("dateTime"),messageMap.get("msgUID")};
+            			String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
+            			Object[] message = {messageMap.get("appId"),messageMap.get("fromUserId"),messageMap.get("targetId"),messageMap.get("targetType"),messageMap.get("GroupId"),messageMap.get("classname"),messageContent,messageMap.get("dateTime"),messageMap.get("msgUID")};
             			messageArray.add(message);
                     }  
                     br.close();  
