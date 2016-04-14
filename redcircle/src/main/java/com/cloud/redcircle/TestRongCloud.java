@@ -1,20 +1,5 @@
 package com.cloud.redcircle;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import io.rong.ApiHttpClient;
-import io.rong.models.ChatroomInfo;
-import io.rong.models.FormatType;
-import io.rong.models.GroupInfo;
-import io.rong.models.ImgMessage;
-import io.rong.models.SdkHttpResult;
-import io.rong.models.TxtMessage;
-import io.rong.models.VoiceMessage;
-import io.rong.models.*;
 /**
  * 一些api的调用示例
  */
