@@ -188,6 +188,7 @@ public class MessageService extends TimerTask{
                         System.out.println(line); 
             			HashMap messageMap = (HashMap) GsonUtil.fromJson(line.substring(19), HashMap.class);
 //            			String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
+            			messageContent = "地地地地地地地 地地  地 ";
             			String messageContent = messageMap.get("content").toString();
             			Object[] message = {messageMap.get("appId"),messageMap.get("fromUserId"),messageMap.get("targetId"),messageMap.get("targetType"),messageMap.get("GroupId"),messageMap.get("classname"),messageContent,messageMap.get("dateTime"),messageMap.get("msgUID")};
             			messageArray.add(message);
