@@ -85,7 +85,7 @@ public class MessageService extends TimerTask{
 	        try {
 				this.downLoadFromUrl(resultMap.get("url").toString(), fileName, savePath);
 				try {
-					List<Object[]> messageArray = this.readZipFile(savePath+fileName);
+					List<Object[]> messageArray = this.loadZipFile(savePath+fileName);
 					System.out.println(messageArray.size());
 		            int[] results = jdbcTemplate.batchUpdate("INSERT INTO t_red_message(appId, fromUserId, targetId, targetType, GroupId, classname, content ,dateTime ,msgUID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", messageArray);
 
@@ -203,6 +203,39 @@ public class MessageService extends TimerTask{
 
     }
 
+	public List<Object[]> loadZipFile(String zipname) {
 
+		List<Object[]> messageArray = new ArrayList<Object[]>();
+
+		try {
+			ZipInputStream zin = new ZipInputStream(new FileInputStream(zipname));
+			ZipEntry entry;
+			System.out.println("");
+
+			while ((entry = zin.getNextEntry()) != null) {
+				// if (entry.getName().equals(name)) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(zin));
+				String s;
+				while ((s = in.readLine()) != null) {
+					System.out.println(s + "\n");
+					HashMap messageMap = (HashMap) GsonUtil.fromJson(s.substring(19), HashMap.class);
+					 String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
+//					String messageContent = messageMap.get("content").toString();
+					Object[] message = { messageMap.get("appId"), messageMap.get("fromUserId"),
+							messageMap.get("targetId"), messageMap.get("targetType"), messageMap.get("GroupId"),
+							messageMap.get("classname"), messageContent, messageMap.get("dateTime"),
+							messageMap.get("msgUID") };
+					messageArray.add(message);
+				}
+				// }
+				zin.closeEntry();
+			}
+			zin.close();
+		} catch (IOException e) {
+		}
+
+		return messageArray;
+
+	}
  
 }
