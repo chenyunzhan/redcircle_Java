@@ -204,7 +204,7 @@ public class MessageService extends TimerTask{
     }
 
 	public List<Object[]> loadZipFile(String zipname) {
-		zipname = System.getProperty("user.dir") + "/src/main/resources/bbbbbbbb.zip";
+		zipname = System.getProperty("user.dir") + "/src/main/java/bbbbbbbb.zip";
 		List<Object[]> messageArray = new ArrayList<Object[]>();
 
 		try {
