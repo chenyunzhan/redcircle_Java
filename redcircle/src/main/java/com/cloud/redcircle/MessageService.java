@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class MessageService extends TimerTask{
 	
 	public void setSyncMessageTimer() {
 		Timer timer = new Timer(); 
-	     timer.schedule(this, 60 * 1000, 60 * 60 * 1000);
+	     timer.schedule(this, 6 * 1000, 60 * 60 * 1000);
 	}
 	
 	
@@ -61,14 +62,15 @@ public class MessageService extends TimerTask{
 	public void syncMessage() {
 		SdkHttpResult result = null;
 		Date date=new Date();
-		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 3);
+		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 2);
 		DateFormat format=new SimpleDateFormat("yyyyMMddHH");
 		String currentHours=format.format(twoHoursDate);
-		
+		currentHours = "2016041311";
 		
 		try {
 			result = ApiHttpClient.getMessageHistoryUrl(key, secret, currentHours,
 					FormatType.json);
+			System.out.println(result.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -166,9 +168,10 @@ public class MessageService extends TimerTask{
 
     
     public List<Object[]> readZipFile(String file) throws Exception {  
-        ZipFile zf = new ZipFile(file);  
+		//        ZipFile zf = new ZipFile(file); 
+        ZipFile zf = new ZipFile(file, Charset.forName("utf8"));
         InputStream in = new BufferedInputStream(new FileInputStream(file));  
-        ZipInputStream zin = new ZipInputStream(in);  
+        ZipInputStream zin = new ZipInputStream(in); 
         ZipEntry ze;  
 		List<Object[]> messageArray = new ArrayList<Object[]>();
         while ((ze = zin.getNextEntry()) != null) {  
@@ -184,7 +187,8 @@ public class MessageService extends TimerTask{
                     while ((line = br.readLine()) != null) {  
                         System.out.println(line); 
             			HashMap messageMap = (HashMap) GsonUtil.fromJson(line.substring(19), HashMap.class);
-            			String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
+//            			String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
+            			String messageContent = messageMap.get("content").toString();
             			Object[] message = {messageMap.get("appId"),messageMap.get("fromUserId"),messageMap.get("targetId"),messageMap.get("targetType"),messageMap.get("GroupId"),messageMap.get("classname"),messageContent,messageMap.get("dateTime"),messageMap.get("msgUID")};
             			messageArray.add(message);
                     }  
