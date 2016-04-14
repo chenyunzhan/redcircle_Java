@@ -169,7 +169,7 @@ public class MessageService extends TimerTask{
     
     public List<Object[]> readZipFile(String file) throws Exception {  
 		//        ZipFile zf = new ZipFile(file); 
-        ZipFile zf = new ZipFile(file, Charset.forName("utf8"));
+        ZipFile zf = new ZipFile(file, Charset.forName("UTF-8"));
         InputStream in = new BufferedInputStream(new FileInputStream(file));  
         ZipInputStream zin = new ZipInputStream(in); 
         ZipEntry ze;  
