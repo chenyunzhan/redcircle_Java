@@ -11,6 +11,7 @@ import io.rong.ApiHttpClient;
 import io.rong.models.FormatType;
 import io.rong.models.SdkHttpResult;
 
+
 @Controller
 public class MessageController {
 	
