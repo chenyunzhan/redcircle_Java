@@ -49,7 +49,7 @@ public class MessageService extends TimerTask{
 	
 	public void setSyncMessageTimer() {
 		Timer timer = new Timer(); 
-	     timer.schedule(this, 6 * 1000, 60 * 60 * 1000);
+	     timer.schedule(this, 60 * 1000, 60 * 60 * 1000);
 	}
 	
 	
@@ -65,8 +65,7 @@ public class MessageService extends TimerTask{
 		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 2);
 		DateFormat format=new SimpleDateFormat("yyyyMMddHH");
 		String currentHours=format.format(twoHoursDate);
-		currentHours = "2016041311";
-		
+		System.out.println("尝试下载" + currentHours + "时段的消息记录");
 		try {
 			result = ApiHttpClient.getMessageHistoryUrl(key, secret, currentHours,
 					FormatType.json);
@@ -167,41 +166,41 @@ public class MessageService extends TimerTask{
     }
 
     
-    public List<Object[]> readZipFile(String file) throws Exception {  
-		//        ZipFile zf = new ZipFile(file); 
-        ZipFile zf = new ZipFile(file, Charset.forName("UTF-8"));
-        InputStream in = new BufferedInputStream(new FileInputStream(file));  
-        ZipInputStream zin = new ZipInputStream(in); 
-        ZipEntry ze;  
-		List<Object[]> messageArray = new ArrayList<Object[]>();
-        while ((ze = zin.getNextEntry()) != null) {  
-            if (ze.isDirectory()) {
-            } else {  
-                System.err.println("file - " + ze.getName() + " : "  
-                        + ze.getSize() + " bytes");  
-                long size = ze.getSize();  
-                if (size > 0) {  
-                    BufferedReader br = new BufferedReader(  
-                            new InputStreamReader(zf.getInputStream(ze)));  
-                    String line;  
-                    while ((line = br.readLine()) != null) {  
-                        System.out.println(line); 
-            			HashMap messageMap = (HashMap) GsonUtil.fromJson(line.substring(19), HashMap.class);
-//            			String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
-            			
-            			String messageContent = messageMap.get("content").toString();
-            			Object[] message = {messageMap.get("appId"),messageMap.get("fromUserId"),messageMap.get("targetId"),messageMap.get("targetType"),messageMap.get("GroupId"),messageMap.get("classname"),messageContent,messageMap.get("dateTime"),messageMap.get("msgUID")};
-            			messageArray.add(message);
-                    }  
-                    br.close();  
-                }  
-                System.out.println();  
-            }  
-        }  
-        zin.closeEntry();  
-		return messageArray;
-
-    }
+//    public List<Object[]> readZipFile(String file) throws Exception {  
+//		//        ZipFile zf = new ZipFile(file); 
+//        ZipFile zf = new ZipFile(file, Charset.forName("UTF-8"));
+//        InputStream in = new BufferedInputStream(new FileInputStream(file));  
+//        ZipInputStream zin = new ZipInputStream(in); 
+//        ZipEntry ze;  
+//		List<Object[]> messageArray = new ArrayList<Object[]>();
+//        while ((ze = zin.getNextEntry()) != null) {  
+//            if (ze.isDirectory()) {
+//            } else {  
+//                System.err.println("file - " + ze.getName() + " : "  
+//                        + ze.getSize() + " bytes");  
+//                long size = ze.getSize();  
+//                if (size > 0) {  
+//                    BufferedReader br = new BufferedReader(  
+//                            new InputStreamReader(zf.getInputStream(ze)));  
+//                    String line;  
+//                    while ((line = br.readLine()) != null) {  
+//                        System.out.println(line); 
+//            			HashMap messageMap = (HashMap) GsonUtil.fromJson(line.substring(19), HashMap.class);
+////            			String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
+//            			
+//            			String messageContent = messageMap.get("content").toString();
+//            			Object[] message = {messageMap.get("appId"),messageMap.get("fromUserId"),messageMap.get("targetId"),messageMap.get("targetType"),messageMap.get("GroupId"),messageMap.get("classname"),messageContent,messageMap.get("dateTime"),messageMap.get("msgUID")};
+//            			messageArray.add(message);
+//                    }  
+//                    br.close();  
+//                }  
+//                System.out.println();  
+//            }  
+//        }  
+//        zin.closeEntry();  
+//		return messageArray;
+//
+//    }
 
 	public List<Object[]> loadZipFile(String zipname) {
 //		zipname = System.getProperty("user.dir") + "/src/main/java/bbbbbbbb.zip";
@@ -221,6 +220,8 @@ public class MessageService extends TimerTask{
 					HashMap messageMap = (HashMap) GsonUtil.fromJson(s.substring(19), HashMap.class);
 //					 String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
 					String messageContent = messageMap.get("content").toString();
+        			messageContent = "mopass不支持，我也没办法";
+
 					Object[] message = { messageMap.get("appId"), messageMap.get("fromUserId"),
 							messageMap.get("targetId"), messageMap.get("targetType"), messageMap.get("GroupId"),
 							messageMap.get("classname"), messageContent, messageMap.get("dateTime"),

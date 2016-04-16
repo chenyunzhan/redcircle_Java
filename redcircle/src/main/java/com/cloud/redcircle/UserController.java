@@ -68,7 +68,7 @@ public class UserController {
 	
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	@ResponseBody
-    public String login(@RequestBody HashMap<String, Object> meMap) {
+    public String modify(@RequestBody HashMap<String, Object> meMap) {
 		
 		
 		String mePhone = (String) meMap.get("mePhone");
@@ -99,7 +99,7 @@ public class UserController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
-    public User modify(@RequestBody HashMap<String, Object> mePhoneMap) {
+    public User login(@RequestBody HashMap<String, Object> mePhoneMap) {
 		
 		
 		String mePhone = (String) mePhoneMap.get("mePhone");
@@ -120,8 +120,10 @@ public class UserController {
 //		List<String> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, java.lang.String.class);
 		
 //		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
-		
-		return userList.get(0);
+		if (userList.size() > 0) {
+			return userList.get(0);
+		}
+		return null;
 		
 
     }
@@ -136,11 +138,11 @@ public class UserController {
 		List<Object> ffriendList = new ArrayList<Object>();
 //		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ?", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
 		
-		List<Map<String, Object>> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ?", new Object[] { mePhone });
+		List<Map<String, Object>> results = jdbcTemplate.queryForList("select distinct a.friend_phone, b.name from t_red_user a left join t_red_user b on a.friend_phone = b.me_phone where a.me_phone = ?", new Object[] { mePhone });
 		List<User> userList = new ArrayList<User>();
 		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
-			userList.add(new User(map.get("me_phone").toString(),map.get("friend_phone").toString(),map.get("sex").toString(),map.get("name").toString()));
+			userList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString()));
 		}
 		
 		
