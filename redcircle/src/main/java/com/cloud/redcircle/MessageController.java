@@ -23,11 +23,13 @@ public class MessageController {
 	@ResponseBody
     public String getFriends(@RequestParam HashMap<String, Object> meMap) {
 		String mePhone = (String) meMap.get("mePhone");
+		String name = (String) meMap.get("name");
+
 		SdkHttpResult result = null;
 
 		//获取token
 		try {
-			result = ApiHttpClient.getToken(key, secret, mePhone, "asdfa",
+			result = ApiHttpClient.getToken(key, secret, mePhone, name,
 					"http://aa.com/a.png", FormatType.json);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
