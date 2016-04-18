@@ -16,7 +16,7 @@
 * 数据库名: redcircle  用户名: root  密码:chenyunzhan
 * 数据库脚本参见同目录sql文件
 * 启动服务: java -jar redcircle-0.0.1-SNAPSHOT.war
-* 接口基础地址: "http://localhost:8080"
+* 接口基础地址: "http://redcircle.tiger.mopaasapp.com"
 * 无论是get还是post传递的参数都是一个map类型的数据
 
 
