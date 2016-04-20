@@ -65,7 +65,7 @@ public class MessageService extends TimerTask{
 		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 2);
 		DateFormat format=new SimpleDateFormat("yyyyMMddHH");
 		String currentHours=format.format(twoHoursDate);
-		currentHours = "2016041821";
+//		currentHours = "2016041821";
 		System.out.println("尝试下载" + currentHours + "时段的消息记录");
 		try {
 			result = ApiHttpClient.getMessageHistoryUrl(key, secret, currentHours,

@@ -15,8 +15,8 @@ import io.rong.models.SdkHttpResult;
 @Controller
 public class MessageController {
 	
-	String key = "qf3d5gbj3ufqh";//替换成您的appkey
-	String secret = "Aqccu1B5d4f";//替换成匹配上面key的secret
+	String key = "sfci50a7c2fsi";//替换成您的appkey
+	String secret = "jjOe248p4rf3V";//替换成匹配上面key的secret
 	
 	
 	@RequestMapping(value="/getRongCloudToken")
