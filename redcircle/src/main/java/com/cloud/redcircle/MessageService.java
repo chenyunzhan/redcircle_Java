@@ -65,6 +65,7 @@ public class MessageService extends TimerTask{
 		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 2);
 		DateFormat format=new SimpleDateFormat("yyyyMMddHH");
 		String currentHours=format.format(twoHoursDate);
+//		currentHours = "2016041821";
 		System.out.println("尝试下载" + currentHours + "时段的消息记录");
 		try {
 			result = ApiHttpClient.getMessageHistoryUrl(key, secret, currentHours,
@@ -213,14 +214,14 @@ public class MessageService extends TimerTask{
 
 			while ((entry = zin.getNextEntry()) != null) {
 				// if (entry.getName().equals(name)) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(zin));
+				BufferedReader in = new BufferedReader(new InputStreamReader(zin,Charset.forName("UTF-8")));
 				String s;
 				while ((s = in.readLine()) != null) {
 					System.out.println(s + "\n");
 					HashMap messageMap = (HashMap) GsonUtil.fromJson(s.substring(19), HashMap.class);
-//					 String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
-					String messageContent = messageMap.get("content").toString();
-        			messageContent = "mopass不支持，我也没办法";
+					 String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
+//					String messageContent = messageMap.get("content").toString();
+//        			messageContent = "mopass不支持，我也没办法";
 
 					Object[] message = { messageMap.get("appId"), messageMap.get("fromUserId"),
 							messageMap.get("targetId"), messageMap.get("targetType"), messageMap.get("GroupId"),
