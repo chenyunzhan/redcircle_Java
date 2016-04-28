@@ -82,3 +82,15 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2016-04-15 13:19:33
+
+
+
+
+DROP TABLE IF EXISTS `t_red_report_user`;
+CREATE TABLE `t_red_report_user` (
+  `report_id` int NOT NULL AUTO_INCREMENT,
+  `report_type` varchar(45) DEFAULT NULL,
+  `user_phone` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`report_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  
