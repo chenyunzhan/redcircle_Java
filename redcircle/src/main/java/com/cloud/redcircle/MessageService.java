@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.zip.ZipEntry;
@@ -25,6 +26,9 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -36,16 +40,16 @@ import io.rong.util.GsonUtil;
 
 @Service
 public class MessageService extends TimerTask{
-	
-	String key = "qf3d5gbj3ufqh";//替换成您的appkey
-	String secret = "Aqccu1B5d4f";//替换成匹配上面key的secret
-	
+		
 	String fileName = "message_log.zip";
 	String savePath = System.getProperty("user.dir") + "/database/";
 
 	
 	@Autowired
     JdbcTemplate jdbcTemplate;
+	
+    @Autowired  
+    RedCircleProperties redCircleProperties; 
 	
 	public void setSyncMessageTimer() {
 		Timer timer = new Timer(); 
@@ -67,8 +71,8 @@ public class MessageService extends TimerTask{
 		String currentHours=format.format(twoHoursDate);
 //		currentHours = "2016041821";
 		System.out.println("尝试下载" + currentHours + "时段的消息记录");
-		try {
-			result = ApiHttpClient.getMessageHistoryUrl(key, secret, currentHours,
+		try {			
+			result = ApiHttpClient.getMessageHistoryUrl(redCircleProperties.getRongCloudKey(), redCircleProperties.getRongCloudSecret(), currentHours,
 					FormatType.json);
 			System.out.println(result.toString());
 		} catch (Exception e) {

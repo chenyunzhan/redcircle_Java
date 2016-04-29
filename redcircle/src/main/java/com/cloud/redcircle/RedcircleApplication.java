@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
+@EnableConfigurationProperties({RedCircleProperties.class})  
+
 public class RedcircleApplication implements CommandLineRunner {
 	
 	@Autowired
