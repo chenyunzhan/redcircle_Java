@@ -67,6 +67,19 @@ public class ScheduledTasks {
 				String targetId2 = (String) map.get("targetId");
 				
 				if(fromUserId.equals(targetId2) && targetId.equals(fromUserId2)) {
+					
+					Boolean isContain1 = true;
+					Boolean isContain2 = true;
+
+					for (Iterator iterator3 = results2.iterator(); iterator3.hasNext();) {
+						Map<String, Object> map3 = (Map<String, Object>) iterator3.next();
+						if (!(fromUserId.equals(map3.get(""))) && !(targetId.equals(map3.get("")))) {
+							isContain1 = false;
+						}
+						if (!(fromUserId2.equals(map3.get(""))) && !(targetId2.equals(map3.get("")))) {
+							isContain2 = false;
+						}
+					}
 //		            int[] results3 = jdbcTemplate.batchUpdate("INSERT INTO t_red_user(friend_phone, me_phone) VALUES (?, ?)", newFriendArray);
 
 				}
