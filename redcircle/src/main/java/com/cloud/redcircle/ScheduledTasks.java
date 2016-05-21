@@ -23,7 +23,7 @@ public class ScheduledTasks {
 	
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(cron="0 55 23 * * ?")
+    @Scheduled(cron="0 01 00 * * ?")
     public void reportCurrentTime() {
         System.out.println("The time is now " + dateFormat.format(new Date()));
         
@@ -36,7 +36,7 @@ public class ScheduledTasks {
 	        	    "        t_red_message " +
 	        	    "    WHERE " +
 	        	    "       classname != 'RC:ReadNtf' " +
-	        	    "            AND dateTime >= NOW() - INTERVAL 2 DAY " +
+	        	    "            AND dateTime >= NOW() - INTERVAL 1 DAY " +
 	        	    "    GROUP BY fromUserId , targetId ) a " +
 	        	    " WHERE " +
 	        	    "    a.messageCount > 10; ";
