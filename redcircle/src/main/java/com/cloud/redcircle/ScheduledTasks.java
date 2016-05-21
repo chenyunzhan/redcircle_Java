@@ -1,6 +1,7 @@
 package com.cloud.redcircle;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -22,7 +23,7 @@ public class ScheduledTasks {
 	
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(cron="0 46 16 * * ?")
+    @Scheduled(cron="0 55 23 * * ?")
     public void reportCurrentTime() {
         System.out.println("The time is now " + dateFormat.format(new Date()));
         
@@ -35,25 +36,25 @@ public class ScheduledTasks {
 	        	    "        t_red_message " +
 	        	    "    WHERE " +
 	        	    "       classname != 'RC:ReadNtf' " +
-	        	    "            AND dateTime >= NOW() - INTERVAL 1 DAY " +
-	        	    "    GROUP BY fromUserId , targetId " +
-	        	    "    ORDER BY dateTime DESC) a " +
+	        	    "            AND dateTime >= NOW() - INTERVAL 2 DAY " +
+	        	    "    GROUP BY fromUserId , targetId ) a " +
 	        	    " WHERE " +
 	        	    "    a.messageCount > 10; ";
         
 		List<Map<String, Object>> results = jdbcTemplate.queryForList(sql);
 		
 		
-		Set set = new HashSet();
-		for (Iterator iterator = results.iterator(); iterator.hasNext();) {
-			Map<String, Object> map = (Map<String, Object>) iterator.next();
-			set.add(map.get("fromUserId"));
-		}
+//		Set set = new HashSet();
+//		for (Iterator iterator = results.iterator(); iterator.hasNext();) {
+//			Map<String, Object> map = (Map<String, Object>) iterator.next();
+//			set.add(map.get("fromUserId"));
+//		}
+//		
+//		String usersSQL = set.toString().replace("[", "(").replace("]", ")");
+//		List<Map<String, Object>> results2 = jdbcTemplate.queryForList("select distinct me_phone, sex, name from t_red_user where me_phone in " + usersSQL);
+		List<String> sqlList = new ArrayList<String>();
 		
-		String usersSQL = set.toString().replace("[", "(").replace("]", ")");
-		List<Map<String, Object>> results2 = jdbcTemplate.queryForList("select distinct me_phone, sex, name from t_red_user where me_phone in " + usersSQL);
-
-		
+		sqlList.add("UPDATE t_red_me_friend SET intimacy = intimacy - 1 where intimacy > 0");
 		
 		for (Iterator iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
@@ -63,31 +64,37 @@ public class ScheduledTasks {
 			
 			for (Iterator iterator2 = results.iterator(); iterator2.hasNext();) {
 				Map<String, Object> map2 = (Map<String, Object>) iterator2.next();
-				String fromUserId2 = (String) map.get("fromUserId");
-				String targetId2 = (String) map.get("targetId");
+				String fromUserId2 = (String) map2.get("fromUserId");
+				String targetId2 = (String) map2.get("targetId");
 				
 				if(fromUserId.equals(targetId2) && targetId.equals(fromUserId2)) {
 					
-					Boolean isContain1 = true;
-					Boolean isContain2 = true;
-
-					for (Iterator iterator3 = results2.iterator(); iterator3.hasNext();) {
-						Map<String, Object> map3 = (Map<String, Object>) iterator3.next();
-						if (!(fromUserId.equals(map3.get(""))) && !(targetId.equals(map3.get("")))) {
-							isContain1 = false;
-						}
-						if (!(fromUserId2.equals(map3.get(""))) && !(targetId2.equals(map3.get("")))) {
-							isContain2 = false;
-						}
+					List<Map<String, Object>> results2 = jdbcTemplate.queryForList("select * from t_red_me_friend WHERE me_phone = " + fromUserId + " AND friend_phone = " + targetId);
+					if (results2.size()==0) {
+						String sql2 = "INSERT INTO t_red_me_friend(me_phone, friend_phone) VALUES ('" + fromUserId + "', '" + targetId + "'); ";
+						String sql3 = "UPDATE t_red_me_friend SET intimacy = 10 WHERE me_phone = " + fromUserId + " AND friend_phone = " + targetId + "; ";
+						sqlList.add(sql2);
+						sqlList.add(sql3);
+					} else {
+						String sql3 = "UPDATE t_red_me_friend SET intimacy = intimacy + 10 WHERE me_phone = " + fromUserId + " AND friend_phone = " + targetId + "; ";
+						sqlList.add(sql3);
 					}
-//		            int[] results3 = jdbcTemplate.batchUpdate("INSERT INTO t_red_user(friend_phone, me_phone) VALUES (?, ?)", newFriendArray);
-
 				}
 				
 			}
 
 			
 		}
+		
+		
+		String[] sqls = new String[sqlList.size()];
+		
+		for (int i = 0; i < sqlList.size(); i++) {
+			sqls[i] = sqlList.get(i);
+		}
+		
+		
+		int[] result = jdbcTemplate.batchUpdate(sqls);
 		
 		
 
