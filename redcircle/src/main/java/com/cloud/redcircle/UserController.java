@@ -29,12 +29,13 @@ public class UserController {
 		List<HashMap<String, String>> friendArray = (List<HashMap<String, String>>) friendArrayMap.get("friendArrayMap");
 		Map<String, String> meInfo = (Map<String, String>) friendArrayMap.get("meInfo");
 		List<Object[]> newFriendArray = new ArrayList<Object[]>();
-		Object[] meArray = {meInfo.get("me_phone"),meInfo.get("me_phone")};
+		Object[] meArray = {meInfo.get("me_phone"),meInfo.get("me_phone"), "36500"};
 		newFriendArray.add(meArray);
 		for (Iterator<HashMap<String, String>> iterator = friendArray.iterator(); iterator.hasNext();) {
 			HashMap<String, String> object = (HashMap<String, String>) iterator.next();
 			object.remove("verify_code_text");
 			object.put("me_phone", meInfo.get("me_phone"));
+			object.put("intimacy", "36500");
 			List<String> valueList = new ArrayList<String>(object.values());
 			Object[] valueArray = valueList.toArray();
 			newFriendArray.add(valueArray);
@@ -49,13 +50,15 @@ public class UserController {
         
         
 		int[] results;
+		int result;
         try {
-            results = jdbcTemplate.batchUpdate("INSERT INTO t_red_user(friend_phone, me_phone) VALUES (?, ?)", newFriendArray);
+        	result = jdbcTemplate.update("INSERT INTO t_red_user(me_phone) VALUES (?)", meInfo.get("me_phone"));
+            results = jdbcTemplate.batchUpdate("INSERT INTO t_red_me_friend(friend_phone, me_phone, intimacy) VALUES (?, ?, ?)", newFriendArray);
 		} catch (Exception e) {
 			return "{\"success\":false, \"msg\":\"注册失败\"}";
 		}
         
-        if (results.length >0) {
+        if (results.length >0 && result>0) {
     		return "{\"success\":\"true\", \"msg\":\"注册成功\"}";
 
         } else {
@@ -114,7 +117,7 @@ public class UserController {
 		List<User> userList = new ArrayList<User>();
 		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
-			userList.add(new User(map.get("me_phone").toString(),map.get("friend_phone").toString(),map.get("sex").toString(),map.get("name").toString()));
+			userList.add(new User(map.get("me_phone").toString(), "", map.get("sex").toString(),map.get("name").toString()));
 		}
 		
 //		List<String> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, java.lang.String.class);
