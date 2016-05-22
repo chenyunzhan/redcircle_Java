@@ -59,7 +59,7 @@ public class UserController {
 		}
         
         if (results.length >0 && result>0) {
-    		return "{\"success\":\"true\", \"msg\":\"注册成功\"}";
+    		return "{\"success\":true, \"msg\":\"注册成功\"}";
 
         } else {
         	return "{\"success\":false, \"msg\":\"注册失败\"}";
@@ -166,6 +166,26 @@ public class UserController {
 			ffriendList.add(friendMap);
 		}
 		return ffriendList;
+	}
+	
+	
+	@RequestMapping(value="/addFriend", method=RequestMethod.POST)
+	@ResponseBody
+    public String addFriend(@RequestBody HashMap<String, Object> mePhoneMap) {
+		
+		String mePhone = (String) mePhoneMap.get("mePhone");
+		String friendPhone = (String) mePhoneMap.get("friendPhone");
+
+		
+		int result = jdbcTemplate.update("INSERT INTO t_red_me_friend(me_phone, friend_phone, intimacy) VALUES (?,?,?)", mePhone, friendPhone, "36500");
+
+		if (result>0) {
+    		return "{\"success\":true, \"msg\":\"添加成功\"}";
+
+        } else {
+        	return "{\"success\":false, \"msg\":\"添加失败\"}";
+        }
+		
 	}
 
 }
