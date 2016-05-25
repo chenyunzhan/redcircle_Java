@@ -117,7 +117,7 @@ public class UserController {
 		List<User> userList = new ArrayList<User>();
 		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
-			userList.add(new User(map.get("me_phone").toString(), "", map.get("sex").toString(),map.get("name").toString()));
+			userList.add(new User(map.get("me_phone").toString(), "", map.get("sex").toString(),map.get("name").toString(),null));
 		}
 		
 //		List<String> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, java.lang.String.class);
@@ -145,7 +145,7 @@ public class UserController {
 		List<User> userList = new ArrayList<User>();
 		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
-			userList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString()));
+			userList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString(), map.get("intimacy").toString()));
 		}
 		
 		
@@ -157,7 +157,7 @@ public class UserController {
 			List<User> ffriend = new ArrayList<User>();
 			for (Iterator<Map<String, Object>> iterator1 = ffResults.iterator(); iterator1.hasNext();) {
 				Map<String, Object> map = (Map<String, Object>) iterator1.next();
-				ffriend.add(new User(map.get("friend_phone").toString(),null,null,map.get("name") == null ? "" : map.get("name").toString()));
+				ffriend.add(new User(map.get("friend_phone").toString(),null,null,map.get("name") == null ? "" : map.get("name").toString(),  map.get("intimacy").toString()));
 			}
 //			List<User> ffriend  = jdbcTemplate.query("select distinct a.friend_phone, b.name from t_red_user a left join t_red_user b on a.friend_phone = b.me_phone where a.me_phone = ?", new Object[] { user.getFriendPhone() }, (rs,rowNum)-> new User(rs.getString("friend_phone"),null,null,rs.getString("name")));
 			Map<String,Object> friendMap = new HashMap<String,Object>();
