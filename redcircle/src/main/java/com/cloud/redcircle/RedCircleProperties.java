@@ -10,6 +10,9 @@ public class RedCircleProperties {
 	private String rongCloudKey;
 	
 	private String rongCloudSecret;
+	
+	private String mopaasNFS;
+
 
 	public String getRongCloudKey() {
 		return rongCloudKey;
@@ -26,6 +29,16 @@ public class RedCircleProperties {
 	public void setRongCloudSecret(String rongCloudSecret) {
 		this.rongCloudSecret = rongCloudSecret;
 	}
+
+	public String getMopaasNFS() {
+		return mopaasNFS;
+	}
+
+	public void setMopaasNFS(String mopaasNFS) {
+		this.mopaasNFS = mopaasNFS;
+	}
+	
+	
 	
 	
 	
