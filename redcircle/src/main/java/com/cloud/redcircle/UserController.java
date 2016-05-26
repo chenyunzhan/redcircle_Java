@@ -259,6 +259,8 @@ public class UserController {
 	    try {
 			String jpgPath = redCircleProperties.getMopaasNFS() + "/" + mePhone + ".jpg";
 			String pngPath = redCircleProperties.getMopaasNFS() + "/" + mePhone + ".png";
+			String userPhotoPath = redCircleProperties.getMopaasNFS() + "/user_photo.png";
+
 		
 			
 			String fileName = mePhone + ".png";
@@ -267,6 +269,10 @@ public class UserController {
 			
 			if(!file.exists()) {
 				file = new File(pngPath);
+			}
+			
+			if(!file.exists()) {
+				file = new File(userPhotoPath);
 			}
 
 			FileInputStream inStream = new FileInputStream(file);  

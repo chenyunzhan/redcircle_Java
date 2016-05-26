@@ -34,7 +34,7 @@ public class MessageController {
 		//获取token
 		try {
 			result = ApiHttpClient.getToken(redCircleProperties.getRongCloudKey(), redCircleProperties.getRongCloudSecret(), mePhone, name,
-					"http://aa.com/a.png", FormatType.json);
+					"http://redcircle.tiger.mopaasapp.com/downPhotoByPhone?mePhone=18706734109", FormatType.json);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
