@@ -66,7 +66,7 @@ public class MessageService extends TimerTask{
 	public void syncMessage() {
 		SdkHttpResult result = null;
 		Date date=new Date();
-		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 2);
+		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 10);
 		DateFormat format=new SimpleDateFormat("yyyyMMddHH");
 		String currentHours=format.format(twoHoursDate);
 //		currentHours = "2016041821";
