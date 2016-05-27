@@ -23,7 +23,7 @@ public class ScheduledTasks {
 	
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(cron="0 20 2 * * ?")
+    @Scheduled(cron="0 01 16 * * ?")
     public void reportCurrentTime() {
         System.out.println("The time is now " + dateFormat.format(new Date()));
         
@@ -54,7 +54,7 @@ public class ScheduledTasks {
 //		List<Map<String, Object>> results2 = jdbcTemplate.queryForList("select distinct me_phone, sex, name from t_red_user where me_phone in " + usersSQL);
 		List<String> sqlList = new ArrayList<String>();
 		
-//		sqlList.add("UPDATE t_red_me_friend SET intimacy = intimacy - 1 where intimacy > 0");
+		sqlList.add("UPDATE t_red_me_friend SET intimacy = intimacy - 1 where intimacy > 0");
 		
 		for (Iterator iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
