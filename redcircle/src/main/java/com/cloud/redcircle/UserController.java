@@ -138,7 +138,7 @@ public class UserController {
 		List<User> userList = new ArrayList<User>();
 		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
-			userList.add(new User(map.get("me_phone").toString(), "", map.get("sex").toString(),map.get("name").toString(),null));
+			userList.add(new User(map.get("me_phone").toString(), "", map.get("sex").toString(),map.get("name").toString(),""));
 		}
 		
 //		List<String> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, java.lang.String.class);
