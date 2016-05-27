@@ -66,7 +66,7 @@ public class MessageService extends TimerTask{
 	public void syncMessage() {
 		SdkHttpResult result = null;
 		Date date=new Date();
-		Date twoHoursDate = new Date(date.getTime() - 1000 * 60 * 60 * 10);
+		Date twoHoursDate = new Date(date.getTime() + 1000 * 60 * 60 * 6);
 		DateFormat format=new SimpleDateFormat("yyyyMMddHH");
 		String currentHours=format.format(twoHoursDate);
 //		currentHours = "2016041821";
@@ -226,7 +226,11 @@ public class MessageService extends TimerTask{
 					 String messageContent = EmojiFilter.filterEmoji(messageMap.get("content").toString());
 //					String messageContent = messageMap.get("content").toString();
 //        			messageContent = "mopass不支持，我也没办法";
-
+					if (messageContent.length() > 10000) {
+						messageContent = "太长了，没有保存";
+					}
+					
+					
 					Object[] message = { messageMap.get("appId"), messageMap.get("fromUserId"),
 							messageMap.get("targetId"), messageMap.get("targetType"), messageMap.get("GroupId"),
 							messageMap.get("classname"), messageContent, messageMap.get("dateTime"),
