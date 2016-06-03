@@ -147,7 +147,7 @@ public class UserController {
 		if (userList.size() > 0) {
 			return userList.get(0);
 		}
-		return null;
+    	return null;
 		
 
     }
@@ -214,6 +214,7 @@ public class UserController {
 	@ResponseBody
 	public String handleFileUpload(@RequestParam("name") String name,
 								   @RequestParam("file") MultipartFile file,
+								   @RequestParam("thumbnail") MultipartFile thumbnail,
 								   RedirectAttributes redirectAttributes) {
 		if (name.contains("/")) {
 			redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
@@ -224,12 +225,19 @@ public class UserController {
 			return "redirect:/";
 		}
 
-		if (!file.isEmpty()) {
+		if (!file.isEmpty() && !thumbnail.isEmpty()) {
 			try {
 				BufferedOutputStream stream = new BufferedOutputStream(
 						new FileOutputStream(new File(redCircleProperties.getMopaasNFS() + "/" + name)));
                 FileCopyUtils.copy(file.getInputStream(), stream);
 				stream.close();
+				
+				
+				
+				BufferedOutputStream stream2 = new BufferedOutputStream(
+						new FileOutputStream(new File(redCircleProperties.getThumbnail() + "/" + name)));
+                FileCopyUtils.copy(thumbnail.getInputStream(), stream2);
+				stream2.close();
 				redirectAttributes.addFlashAttribute("message",
 						"You successfully uploaded " + name + "!");
 				
@@ -255,25 +263,35 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "downPhotoByPhone")  
-	public void downPhotoByUserPhone(@RequestParam("mePhone") String mePhone, HttpServletResponse response){  
+	public void downPhotoByUserPhone(@RequestParam("mePhone") String mePhone, @RequestParam(value="type", defaultValue="original") String type, HttpServletResponse response){  
 	    try {
-			String jpgPath = redCircleProperties.getMopaasNFS() + "/" + mePhone + ".jpg";
-			String pngPath = redCircleProperties.getMopaasNFS() + "/" + mePhone + ".png";
-			String userPhotoPath = redCircleProperties.getMopaasNFS() + "/user_photo.png";
+	    	
+			String filePath = null;
+			String userPhotoPath = null;
+
+	    	if("original".equals(type)) {
+	    		filePath = redCircleProperties.getMopaasNFS() + "/" + mePhone + ".png";
+	    		userPhotoPath = redCircleProperties.getMopaasNFS() + "/user_photo.png";
+
+	    	} else if ("thumbnail".equals(type)) {
+	    		filePath = redCircleProperties.getThumbnail() + "/" + mePhone + ".png";
+	    		userPhotoPath = redCircleProperties.getThumbnail() + "/user_photo.png";
+	    	}
+	    	
+//			String jpgPath = redCircleProperties.getMopaasNFS() + "/" + mePhone + ".jpg";
+//			String pngPath = redCircleProperties.getMopaasNFS() + "/" + mePhone + ".png";
+//			String userPhotoPath = redCircleProperties.getMopaasNFS() + "/user_photo.png";
 
 		
 			
 			String fileName = mePhone + ".png";
 
-			File file = new File(jpgPath);
-			
-			if(!file.exists()) {
-				file = new File(pngPath);
-			}
+			File file = new File(filePath);
 			
 			if(!file.exists()) {
 				file = new File(userPhotoPath);
 			}
+			
 
 			FileInputStream inStream = new FileInputStream(file);  
  

@@ -12,6 +12,8 @@ public class RedCircleProperties {
 	private String rongCloudSecret;
 	
 	private String mopaasNFS;
+	
+	private String thumbnail;
 
 
 	public String getRongCloudKey() {
@@ -37,6 +39,16 @@ public class RedCircleProperties {
 	public void setMopaasNFS(String mopaasNFS) {
 		this.mopaasNFS = mopaasNFS;
 	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
+	
 	
 	
 	
