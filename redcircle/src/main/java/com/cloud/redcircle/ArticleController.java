@@ -3,6 +3,9 @@ package com.cloud.redcircle;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,6 +48,9 @@ public class ArticleController {
 			redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
 			return "redirect:/";
 		}
+		
+		
+		StringBuffer imagesSB = new StringBuffer();
 
 
 		for(int i=0; i<sourceList.length;i++) {
@@ -52,6 +58,8 @@ public class ArticleController {
 			MultipartFile thumbnail = thumbList[i];
 			
 	        UUID uuid = UUID.randomUUID();
+	        
+	        imagesSB.append(uuid+"#");
 
 
 			if (!file.isEmpty() && !thumbnail.isEmpty()) {
@@ -92,7 +100,25 @@ public class ArticleController {
 		}
 		
 		
-		return null;
+		Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) + 0);
+		
+//		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss");
+		String dateStr = dateFormat.format(calendar.getTime());
+
+		
+		int result = jdbcTemplate.update("INSERT INTO t_red_article(id, content, images, created_at, created_by, updated_at) VALUES (?,?,?,?,?,?)", UUID.randomUUID().toString(), content, imagesSB.toString(), dateStr,  mePhone, dateStr);
+
+		if (result>0) {
+    		return "{\"success\":true, \"msg\":\"添加成功\"}";
+
+        } else {
+        	return "{\"success\":false, \"msg\":\"添加失败\"}";
+        }
+		
+		
 
 	}
 

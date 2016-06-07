@@ -93,4 +93,17 @@ CREATE TABLE `t_red_report_user` (
   `user_phone` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `t_red_article` (
+  `id` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  `created_at` varchar(255) NOT NULL,
+  `created_by` varchar(45) NOT NULL,
+  `updated_at` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
   
