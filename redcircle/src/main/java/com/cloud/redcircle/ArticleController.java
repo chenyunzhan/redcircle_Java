@@ -32,16 +32,16 @@ public class ArticleController {
     
 	@RequestMapping(method = RequestMethod.POST, value = "/addArticle")
 	@ResponseBody
-	public String handleFileUpload(@RequestParam("mePhone") String name,
+	public String handleFileUpload(@RequestParam("mePhone") String mePhone,
 									@RequestParam("content") String content,
-								   @RequestParam("sourceList") CommonsMultipartFile[]  sourceList,
-								   @RequestParam("thumbList") CommonsMultipartFile[] thumbList,
+								   @RequestParam("sourceList") MultipartFile[]  sourceList,
+								   @RequestParam("thumbList") MultipartFile[] thumbList,
 								   RedirectAttributes redirectAttributes) {
-		if (name.contains("/")) {
+		if (mePhone.contains("/")) {
 			redirectAttributes.addFlashAttribute("message", "Folder separators not allowed");
 			return "redirect:/";
 		}
-		if (name.contains("/")) {
+		if (mePhone.contains("/")) {
 			redirectAttributes.addFlashAttribute("message", "Relative pathnames not allowed");
 			return "redirect:/";
 		}
@@ -68,7 +68,7 @@ public class ArticleController {
 	                FileCopyUtils.copy(thumbnail.getInputStream(), stream2);
 					stream2.close();
 					redirectAttributes.addFlashAttribute("message",
-							"You successfully uploaded " + name + "!");
+							"You successfully uploaded " + mePhone + "!");
 					
 					
 					System.out.println("{\"success\":true, \"msg\":\"上传成功\"}");
@@ -76,7 +76,7 @@ public class ArticleController {
 				}
 				catch (Exception e) {
 					redirectAttributes.addFlashAttribute("message",
-							"You failed to upload " + name + " => " + e.getMessage());
+							"You failed to upload " + mePhone + " => " + e.getMessage());
 					System.out.println("{\"success\":false, \"msg\":\"上传失败\"}");
 
 
@@ -84,7 +84,7 @@ public class ArticleController {
 			}
 			else {
 				redirectAttributes.addFlashAttribute("message",
-						"You failed to upload " + name + " because the file was empty");
+						"You failed to upload " + mePhone + " because the file was empty");
 				System.out.println("{\"success\":false, \"msg\":\"上传失败\"}");
 
 
