@@ -4,9 +4,13 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +103,15 @@ public class ArticleController {
 			}
 		}
 		
+		String type = "10";
+		if (imagesSB.length() > 0) {
+			if(sourceList.length == 1) {
+				type = "9";
+			} else {
+				type = "11";
+			}
+		}
+		
 		
 		Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) + 0);
@@ -109,7 +122,7 @@ public class ArticleController {
 		String dateStr = dateFormat.format(calendar.getTime());
 
 		
-		int result = jdbcTemplate.update("INSERT INTO t_red_article(id, content, images, created_at, created_by, updated_at) VALUES (?,?,?,?,?,?)", UUID.randomUUID().toString(), content, imagesSB.toString(), dateStr,  mePhone, dateStr);
+		int result = jdbcTemplate.update("INSERT INTO t_red_article(id, content, type, images, created_at, created_by, updated_at) VALUES (?,?,?,?,?,?)", UUID.randomUUID().toString(), content, type, imagesSB.toString(), dateStr,  mePhone, dateStr);
 
 		if (result>0) {
     		return "{\"success\":true, \"msg\":\"添加成功\"}";
@@ -120,6 +133,26 @@ public class ArticleController {
 		
 		
 
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/getArticles")
+	@ResponseBody
+    public List<Map<String, Object>> getArticles(@RequestParam HashMap<String, Object> mePhoneMap) {
+		String mePhone = (String) mePhoneMap.get("mePhone");
+		
+				
+		List<Map<String, Object>> results = jdbcTemplate.queryForList("SELECT * FROM redcircle.t_red_article where created_by = ?", new Object[] { mePhone });
+//		List<User> articleList = new ArrayList<User>();
+//		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
+//			Map<String, Object> map = (Map<String, Object>) iterator.next();
+//			articleList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString(), map.get("intimacy").toString()));
+//		}
+		
+		
+		return results;
 	}
 
 }
