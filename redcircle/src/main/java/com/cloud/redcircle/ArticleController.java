@@ -64,19 +64,20 @@ public class ArticleController {
 	        UUID uuid = UUID.randomUUID();
 	        
 	        imagesSB.append(uuid+"#");
-
+	        
+	        String fileName = uuid.toString() + ".png";
 
 			if (!file.isEmpty() && !thumbnail.isEmpty()) {
 				try {
 					BufferedOutputStream stream = new BufferedOutputStream(
-							new FileOutputStream(new File(redCircleProperties.getMopaasNFS() + "/" + uuid)));
+							new FileOutputStream(new File(redCircleProperties.getMopaasNFS() + "/" + fileName)));
 	                FileCopyUtils.copy(file.getInputStream(), stream);
 					stream.close();
 					
 					
 					
 					BufferedOutputStream stream2 = new BufferedOutputStream(
-							new FileOutputStream(new File(redCircleProperties.getThumbnail() + "/" + uuid)));
+							new FileOutputStream(new File(redCircleProperties.getThumbnail() + "/" + fileName)));
 	                FileCopyUtils.copy(thumbnail.getInputStream(), stream2);
 					stream2.close();
 					redirectAttributes.addFlashAttribute("message",
@@ -122,7 +123,7 @@ public class ArticleController {
 		String dateStr = dateFormat.format(calendar.getTime());
 
 		
-		int result = jdbcTemplate.update("INSERT INTO t_red_article(id, content, type, images, created_at, created_by, updated_at) VALUES (?,?,?,?,?,?)", UUID.randomUUID().toString(), content, type, imagesSB.toString(), dateStr,  mePhone, dateStr);
+		int result = jdbcTemplate.update("INSERT INTO t_red_article(id, content, type, images, created_at, created_by, updated_at) VALUES (?,?,?,?,?,?,?)", UUID.randomUUID().toString(), content, type, imagesSB.toString(), dateStr,  mePhone, dateStr);
 
 		if (result>0) {
     		return "{\"success\":true, \"msg\":\"添加成功\"}";
