@@ -143,7 +143,8 @@ public class ArticleController {
 	@ResponseBody
     public List<Map<String, Object>> getArticles(@RequestParam HashMap<String, Object> mePhoneMap) {
 		String mePhone = (String) mePhoneMap.get("mePhone");
-		
+		String circleLevel = (String) mePhoneMap.get("circleLevel");
+
 				
 		List<Map<String, Object>> results = jdbcTemplate.queryForList("SELECT * FROM redcircle.t_red_article where created_by = ?", new Object[] { mePhone });
 //		List<User> articleList = new ArrayList<User>();
@@ -151,7 +152,7 @@ public class ArticleController {
 //			Map<String, Object> map = (Map<String, Object>) iterator.next();
 //			articleList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString(), map.get("intimacy").toString()));
 //		}
-		
+		String str = "select * from t_red_article c where c.created_by in (select b.friend_phone from t_red_user a left join t_red_me_friend b on a.me_phone = b.me_phone where a.me_phone = '15891739884')";
 		
 		return results;
 	}
