@@ -144,15 +144,24 @@ public class ArticleController {
     public List<Map<String, Object>> getArticles(@RequestParam HashMap<String, Object> mePhoneMap) {
 		String mePhone = (String) mePhoneMap.get("mePhone");
 		String circleLevel = (String) mePhoneMap.get("circleLevel");
-
+		String startNo = (String) mePhoneMap.get("startNo");
+		
+		String sql = null;
+		
+		if ("0".equals(circleLevel)) {
+			sql = "SELECT a.*, b.name FROM redcircle.t_red_article a left join t_red_user b on a.created_by = b.me_phone where a.created_by = ? order by a.created_at desc limit " + startNo + ", 10";
+		} else if ("1".equals(circleLevel)) {
+			sql = "select c.*, d.name from t_red_article c  left join t_red_user d on c.created_by = d.me_phone where c.created_by in (select b.friend_phone from t_red_user a left join t_red_me_friend b on a.me_phone = b.me_phone where a.me_phone = ?) order by c.created_at desc limit " + startNo + ", 10";
+		} else if ("2".equals(circleLevel)) {
+			sql = "select c.*, d.name from t_red_article c  left join t_red_user d on c.created_by = d.me_phone where c.created_by in (select distinct c.friend_phone from t_red_me_friend c where c.me_phone in (select b.friend_phone from t_red_user a left join t_red_me_friend b on a.me_phone = b.me_phone where a.me_phone = ?)) order by c.created_at desc limit " + startNo + ", 10";
+		}
 				
-		List<Map<String, Object>> results = jdbcTemplate.queryForList("SELECT * FROM redcircle.t_red_article where created_by = ?", new Object[] { mePhone });
+		List<Map<String, Object>> results = jdbcTemplate.queryForList(sql, new Object[] { mePhone });
 //		List<User> articleList = new ArrayList<User>();
 //		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
 //			Map<String, Object> map = (Map<String, Object>) iterator.next();
 //			articleList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString(), map.get("intimacy").toString()));
 //		}
-		String str = "select * from t_red_article c where c.created_by in (select b.friend_phone from t_red_user a left join t_red_me_friend b on a.me_phone = b.me_phone where a.me_phone = '15891739884')";
 		
 		return results;
 	}

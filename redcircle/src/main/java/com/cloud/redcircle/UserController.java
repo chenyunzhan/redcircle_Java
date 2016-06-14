@@ -138,7 +138,7 @@ public class UserController {
 		List<User> userList = new ArrayList<User>();
 		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
-			userList.add(new User(map.get("me_phone").toString(), "", map.get("sex").toString(),map.get("name").toString(),""));
+			userList.add(new User(map.get("me_phone").toString(), "", map.get("sex").toString(),map.get("name").toString(),"",""));
 		}
 		
 //		List<String> results = jdbcTemplate.queryForList("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, java.lang.String.class);
@@ -162,11 +162,11 @@ public class UserController {
 		List<Object> ffriendList = new ArrayList<Object>();
 //		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ?", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
 		
-		List<Map<String, Object>> results = jdbcTemplate.queryForList("SELECT DISTINCT    c.name, b.friend_phone, b.intimacy FROM    t_red_user a        LEFT JOIN    t_red_me_friend b ON a.me_phone = b.me_phone        LEFT JOIN    t_red_user c ON b.friend_phone = c.me_phone WHERE b.intimacy > 0 and    a.me_phone = ?", new Object[] { mePhone });
+		List<Map<String, Object>> results = jdbcTemplate.queryForList("SELECT DISTINCT    c.name, b.friend_phone, b.intimacy, b.recommend_language FROM    t_red_user a        LEFT JOIN    t_red_me_friend b ON a.me_phone = b.me_phone        LEFT JOIN    t_red_user c ON b.friend_phone = c.me_phone WHERE b.intimacy > 0 and    a.me_phone = ?", new Object[] { mePhone });
 		List<User> userList = new ArrayList<User>();
 		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
 			Map<String, Object> map = (Map<String, Object>) iterator.next();
-			userList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString(), map.get("intimacy").toString()));
+			userList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString(), map.get("intimacy").toString(), map.get("recommend_language").toString()));
 		}
 		
 		
@@ -174,11 +174,11 @@ public class UserController {
 			User user = (User) iterator.next();
 			
 			
-			List<Map<String, Object>> ffResults = jdbcTemplate.queryForList("SELECT DISTINCT    c.name, b.friend_phone, b.intimacy FROM    t_red_user a        LEFT JOIN    t_red_me_friend b ON a.me_phone = b.me_phone        LEFT JOIN    t_red_user c ON b.friend_phone = c.me_phone WHERE  b.intimacy > 0 and  a.me_phone = ?", new Object[] { user.getFriendPhone() });
+			List<Map<String, Object>> ffResults = jdbcTemplate.queryForList("SELECT DISTINCT    c.name, b.friend_phone, b.intimacy, b.recommend_language FROM    t_red_user a        LEFT JOIN    t_red_me_friend b ON a.me_phone = b.me_phone        LEFT JOIN    t_red_user c ON b.friend_phone = c.me_phone WHERE  b.intimacy > 0 and  a.me_phone = ?", new Object[] { user.getFriendPhone() });
 			List<User> ffriend = new ArrayList<User>();
 			for (Iterator<Map<String, Object>> iterator1 = ffResults.iterator(); iterator1.hasNext();) {
 				Map<String, Object> map = (Map<String, Object>) iterator1.next();
-				ffriend.add(new User(map.get("friend_phone").toString(),null,null,map.get("name") == null ? "" : map.get("name").toString(),  map.get("intimacy").toString()));
+				ffriend.add(new User(map.get("friend_phone").toString(),null,null,map.get("name") == null ? "" : map.get("name").toString(),  map.get("intimacy").toString(), map.get("recommend_language").toString()));
 			}
 //			List<User> ffriend  = jdbcTemplate.query("select distinct a.friend_phone, b.name from t_red_user a left join t_red_user b on a.friend_phone = b.me_phone where a.me_phone = ?", new Object[] { user.getFriendPhone() }, (rs,rowNum)-> new User(rs.getString("friend_phone"),null,null,rs.getString("name")));
 			Map<String,Object> friendMap = new HashMap<String,Object>();

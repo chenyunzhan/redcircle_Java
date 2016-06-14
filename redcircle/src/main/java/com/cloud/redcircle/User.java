@@ -7,15 +7,17 @@ public class User {
 	private String sex;
 	private String name;
 	private String intimacy;
+	private String recommendLanguage;
 	
 	
-	public User(String mePhone, String friendPhone, String sex, String name, String intimacy) {
+	public User(String mePhone, String friendPhone, String sex, String name, String intimacy, String recommendLanguage) {
 		super();
 		this.mePhone = mePhone;
 		this.friendPhone = friendPhone;
 		this.sex = sex;
 		this.name = name;
 		this.intimacy = intimacy;
+		this.recommendLanguage = recommendLanguage;
 	}
 
 
@@ -67,6 +69,18 @@ public class User {
 	public void setIntimacy(String intimacy) {
 		this.intimacy = intimacy;
 	}
+
+
+	public String getRecommendLanguage() {
+		return recommendLanguage;
+	}
+
+
+	public void setRecommendLanguage(String recommendLanguage) {
+		this.recommendLanguage = recommendLanguage;
+	}
+	
+	
 	
 	
 	
