@@ -121,6 +121,29 @@ public class UserController {
     }
 	
 	
+	@RequestMapping(value="/modifyDetail", method=RequestMethod.POST)
+	@ResponseBody
+    public String modifyDetail(@RequestBody HashMap<String, Object> meMap) {
+		
+		
+		String mePhone = (String) meMap.get("mePhone");
+		String friendPhone = (String) meMap.get("friendPhone");
+		String recommendLanguage = (String) meMap.get("recommendLanguage");
+
+		
+		int[] results = jdbcTemplate.batchUpdate("update t_red_me_friend set recommend_language = '" + recommendLanguage + "' where me_phone = " + mePhone + " and friend_phone = " + friendPhone);
+
+        if (results.length >0) {
+    		return "{\"success\":true, \"msg\":\"修改成功\"}";
+
+        } else {
+        	return "{\"success\":false, \"msg\":\"修改失败\"}";
+        }
+		
+
+    }
+	
+	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
     public User login(@RequestBody HashMap<String, Object> mePhoneMap) {
@@ -146,6 +169,25 @@ public class UserController {
 //		List<User> results  = jdbcTemplate.query("select * from t_red_user where me_phone = ? limit 0, 1", new Object[] { mePhone }, (rs,rowNum)-> new User(rs.getString("me_phone"),rs.getString("friend_phone"),rs.getString("sex"),rs.getString("name")));
 		if (userList.size() > 0) {
 			return userList.get(0);
+		}
+    	return null;
+		
+
+    }
+	
+	
+	
+	@RequestMapping(value="/userDetail", method=RequestMethod.POST)
+	@ResponseBody
+    public Map<String, Object> getUserDetail(@RequestBody HashMap<String, Object> mePhoneMap) {
+		
+		
+		String mePhone = (String) mePhoneMap.get("mePhone");
+		String friendPhone = (String) mePhoneMap.get("friendPhone");
+		List<Map<String, Object>> results = jdbcTemplate.queryForList("select a.recommend_language, b.* from t_red_me_friend a left join t_red_user b on a.friend_phone = b.me_phone where a.friend_phone = ? and a.me_phone = ?", new Object[] { friendPhone, mePhone });
+
+		if (results.size() == 1) {
+			return results.get(0);
 		}
     	return null;
 		
