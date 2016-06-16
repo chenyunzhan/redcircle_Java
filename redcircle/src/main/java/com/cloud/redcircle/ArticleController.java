@@ -149,7 +149,7 @@ public class ArticleController {
 		String sql = null;
 		
 		if ("0".equals(circleLevel)) {
-			sql = "SELECT a.*, b.name FROM redcircle.t_red_article a left join t_red_user b on a.created_by = b.me_phone where a.created_by = ? order by a.created_at desc limit " + startNo + ", 10";
+			sql = "SELECT a.*, b.name FROM t_red_article a left join t_red_user b on a.created_by = b.me_phone where a.created_by = ? order by a.created_at desc limit " + startNo + ", 10";
 		} else if ("1".equals(circleLevel)) {
 			sql = "select c.*, d.name from t_red_article c  left join t_red_user d on c.created_by = d.me_phone where c.created_by in (select b.friend_phone from t_red_user a left join t_red_me_friend b on a.me_phone = b.me_phone where a.me_phone = ?) order by c.created_at desc limit " + startNo + ", 10";
 		} else if ("2".equals(circleLevel)) {
