@@ -157,11 +157,12 @@ public class ArticleController {
 		}
 				
 		List<Map<String, Object>> results = jdbcTemplate.queryForList(sql, new Object[] { mePhone });
-//		List<User> articleList = new ArrayList<User>();
-//		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
-//			Map<String, Object> map = (Map<String, Object>) iterator.next();
-//			articleList.add(new User(null,map.get("friend_phone").toString(),null,map.get("name") == null ? "" : map.get("name").toString(), map.get("intimacy").toString()));
-//		}
+		for (Iterator<Map<String, Object>> iterator = results.iterator(); iterator.hasNext();) {
+			Map<String, Object> map = (Map<String, Object>) iterator.next();
+			String commentSQL = "select a.*, b.name as commenter_by_name, c.name as commenter_to_name from t_red_comment a left join t_red_user b on a.commenter_by = b.me_phone left join t_red_user c on a.commenter_to = c.me_phone where a.article_id =  ?";
+			List<Map<String, Object>> comments = jdbcTemplate.queryForList(commentSQL, new Object[] { map.get("id") });
+			map.put("comments", comments);
+		}
 		
 		return results;
 	}
