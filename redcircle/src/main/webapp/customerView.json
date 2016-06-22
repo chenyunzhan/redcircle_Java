@@ -1,0 +1,53 @@
+{
+    "type": "data",
+    "whlCmd": [
+        {
+            "title": "处理",
+            "url": "/x/mobsrv/affa/nextnode?proxy=webplat",
+            "id": "CMD_AFFA_SELNEXTNODES",
+            "params": {
+                "dealflag": "dealFlag",
+                "flowid": "flow_id",
+                "nodeid": "node_id",
+                "taskid": "task_id",
+                "choiceway": "way_id"
+            },
+            "type": "one",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-circle-arrow-right"
+        }
+    ],
+    "ver": 20151201,
+    "aaData": {
+        "dealFlag": "",
+        "last_name": "刘昊",
+        "create_name": "刘昊",
+        "tasks": {
+            "aaData": [],
+            "iTotalRecords": 0
+        },
+        "status_desc": "1普通节点(初始管理员)",
+        "create_user": "4202",
+        "create_time": "2016-03-09 13:28:12",
+        "last_user": "4202",
+        "last_time": "2016-03-10 14:39:36",
+        "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+        "busidata": {
+            "notiusers": {
+                "": ""
+            }
+        },
+        "task_id": "db263ddee68a11e5b43b50e5498642a0",
+        "assignto": "888",
+        "affa_title": "ceshi",
+        "affa_id": "b769ac80e5b711e5886250e5498642a0",
+        "priority": "",
+        "attach": [],
+        "affa_summary": "111111",
+        "icon_cls": "icon-twitter",
+        "flow_id": "t40e3b40d51011e5899f50e5498642a0",
+        "classify": ""
+    },
+    "ret": ""
+}

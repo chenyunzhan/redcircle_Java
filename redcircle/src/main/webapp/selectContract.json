@@ -1,0 +1,48 @@
+{
+    "whlCmd": [
+        {
+            "title": "下一步",
+            "url": "/x/mobsrv/affa/nextnode?proxy=intrust",
+            "id": "DynamicSelectViewController",
+            "params": {
+                "flowid": "flow_id"
+            },
+            "type": "one",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-circle-arrow-right"
+        }
+    ],
+    "ver": 20151201,
+    "ret": "",
+    "aaData": {
+        "nodes": [
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX12号",
+                "flow_id": "50"
+            },
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX13号",
+                "flow_id": "18"
+            },
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX14号",
+                "flow_id": "28"
+            },
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX15号",
+                "flow_id": "48"
+            },
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX16号",
+                "flow_id": "63"
+            }
+        ],
+        "parallel": false
+    },
+    "colnames": {
+        "id": "flow_id",
+        "title": "flow_title"
+    },
+    "type": "select"
+}

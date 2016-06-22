@@ -1,0 +1,164 @@
+{
+    "whlCmd": [],
+    "ver": 20151201,
+    "iTotalRecords": 6,
+    "aaData": [
+        {
+            "last_name": "刘昊",
+            "create_name": "刘昊",
+            "task_id": "dc882ceee68c11e5af2150e5498642a0",
+            "assignto": "888",
+            "affa_title": "陈云展",
+            "affa_id": "aacff740e5b711e5b9ba50e5498642a0",
+            "node_title": "18706745612",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:27:51",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "2016-03-10 14:53:57",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "刘昊",
+            "create_name": "刘昊",
+            "task_id": "s6f0d8a1e68b11e5a46150e5498642a0",
+            "assignto": "888",
+            "affa_title": "李明",
+            "affa_id": "b178ad80e5b711e5b13250e5498642a0",
+            "node_title": "18706745612",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:28:02",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "2016-03-10 14:42:36",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "刘昊",
+            "create_name": "刘昊",
+            "task_id": "db263ddee68a11e5b43b50e5498642a0",
+            "assignto": "888",
+            "affa_title": "李阳",
+            "affa_id": "b769ac80e5b711e5886250e5498642a0",
+            "node_title": "18706745612",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:28:12",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "2016-03-10 14:39:36",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "刘昊",
+            "create_name": "刘昊",
+            "task_id": "c36db38fe68a11e5865f50e5498642a0",
+            "assignto": "888",
+            "affa_title": "陈彬",
+            "affa_id": "ed1f5e61e5b711e58ba350e5498642a0",
+            "node_title": "18706745612",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:29:42",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "2016-03-10 14:38:56",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "刘昊",
+            "create_name": "刘昊",
+            "task_id": "v3e31300e5b911e58fee50e5498642a0",
+            "assignto": "888",
+            "affa_title": "陈怡",
+            "affa_id": "v3dbe70fe5b911e5bda650e5498642a0",
+            "node_title": "18706745612",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:40:38",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "2016-03-09 13:40:38",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "沈烁",
+            "create_name": "刘昊",
+            "task_id": "v209f610e1af11e5823e50e5498642a0",
+            "assignto": "888",
+            "affa_title": "孙佳",
+            "affa_id": "t52ae8b0e1af11e5829650e5498642a0",
+            "node_title": "18706745612",
+            "create_user": "4202",
+            "node_id": "BC95F674CA3B4B0AB90AE3EB9B9C81DF",
+            "create_time": "2016-03-04 10:18:06",
+            "last_user": "9906",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "2016-03-04 15:27:33",
+            "icon_cls": "icon-twitter"
+        }
+    ],
+    "rowCmd": [
+        {
+            "title": "客户详情",
+            "url": "/x/mobsrv/customer/view?proxy=webplat",
+            "id": "CustomerDetailViewVC",
+            "params": {
+                "dealflag": "dealFlag",
+                "flowid": "flow_id",
+                "nodeid": "node_id",
+                "taskid": "task_id",
+                "affaid": "affa_id"
+            },
+            "type": "tap",
+            "method": "get",
+            "desc": "查看事务详情"
+        },
+        {
+            "title": "处理",
+            "url": "/x/mobsrv/affa/nextnode?proxy=webplat",
+            "id": "CMD_AFFA_SELNEXTNODES",
+            "params": {
+                "flowid": "flow_id",
+                "nodeid": "node_id",
+                "taskid": "task_id"
+            },
+            "type": "one",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-circle-arrow-right"
+        },
+        {
+            "title": "踏步",
+            "url": "/x/mobsrv/task/loop?proxy=webplat",
+            "id": "CMD_AFFA_LOOP_BEFORE",
+            "params": {
+                "dealflag": "dealFlag",
+                "flowid": "flow_id",
+                "nodeid": "node_id",
+                "taskid": "task_id"
+            },
+            "method": "get",
+            "present": "2",
+            "icon": "icon-repeat"
+        },
+        {
+            "title": "关注",
+            "url": "/x/mobsrv/affa/focus?proxy=webplat",
+            "method": "post",
+            "params": {
+                "affaid": "affa_id"
+            },
+            "id": "CMD_AFFA_FOCUS_SUBMIT",
+            "icon": "icon-star"
+        }
+    ],
+    "type": "list",
+    "colnames": {
+    	"desc": "node_title",
+        "title": "affa_title"
+    },
+    "ret": ""
+}

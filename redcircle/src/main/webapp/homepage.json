@@ -1,0 +1,116 @@
+{
+  "type": "menu",
+  "theme": "GRIDS",
+  "ver": 20151201,
+  "aaData": [
+    {
+      "style": "2L",
+      "items": [
+        [
+          {
+            "title": "签约录像",
+            "url": "/x/mobsrv/record?proxy=webplat",
+            "badgtype": "badge",
+            "iconclor": "ff2d65",
+            "badge": 0,
+            "id": "RecordViewController",
+            "icon": "e670"
+          },
+          {
+            "title": "上传",
+            "url": "/x/mobsrv/affa/cando?proxy=webplat",
+            "badgtype": "badge",
+            "iconclor": "2cb4ff",
+            "badge": 0,
+            "id": "CMD_AFFA_CANDO",
+            "icon": "e637"
+          },
+          {
+            "title": "传输列表",
+            "url": "/x/mobsrv/affa/cando?proxy=webplat",
+            "badgtype": "badge",
+            "iconclor": "2cb4ff",
+            "badge": 0,
+            "id": "CMD_AFFA_CANDO",
+            "icon": "e601"
+          }
+        ]
+      ],
+      "gid": "affa_default1",
+      "margin_top": "0",
+      "gname": "\u4e8b\u52a1\u5e38\u7528\u529f\u80fd1",
+      "border": "1"
+    },
+    {
+      "style": "2T",
+      "items": [
+        [
+          {
+            "title": "我的客户",
+            "url": "/x/mobsrv/customer?proxy=webplat",
+            "badgtype": "num",
+            "iconclor": "00c67e",
+            "badge": 0,
+            "id": "DynamicTableViewController",
+            "icon": "e668"
+          },
+          {
+            "title": "公司产品",
+            "url": "/x/mobsrv/product?proxy=webplat",
+            "badgtype": "num",
+            "iconclor": "00c67e",
+            "badge": 0,
+            "id": "DynamicTableViewController",
+            "icon": "e634"
+          }
+        ],
+        [
+          {
+            "title": "预约",
+            "url": "/x/mobsrv/product/booking?proxy=webplat",
+            "badgtype": "num",
+            "iconclor": "00c67e",
+            "badge": 0,
+            "id": "DynamicSelectViewController",
+            "icon": "e609"
+          },
+          {
+            "title": "申购",
+            "url": "/x/mobsrv/product/booking?proxy=webplat",
+            "badgtype": "none",
+            "iconclor": "00c67e",
+            "badge": 4,
+            "id": "DynamicSelectViewController",
+            "icon": "e64c"
+          }
+        ],
+        [
+          {
+            "title": "转让",
+            "url": "/x/mobsrv/product/booking?proxy=webplat",
+            "badgtype": "num",
+            "iconclor": "00c2eb",
+            "badge": 0,
+            "id": "DynamicSelectViewController",
+            "icon": "e693"
+          },
+          {
+            "title": "受益帐户变更",
+            "url": "/x/mobsrv/product/booking?proxy=webplat",
+            "id": "DynamicSelectViewController",
+            "iconclor": "00c2eb",
+            "desc": "\u53d1\u8d77\u65b0\u7684\u4e8b\u52a1",
+            "method": "get",
+            "present": "2",
+            "icon": "e635"
+          }
+        ]
+      ],
+      "gid": "affa_default2",
+      "margin_top": "1",
+      "gname": "\u4e8b\u52a1\u5e38\u7528\u529f\u80fd2",
+      "border": "1"
+    }
+  ],
+  "ret": ""
+}

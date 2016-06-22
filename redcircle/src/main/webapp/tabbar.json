@@ -1,0 +1,24 @@
+{
+    "type": "tab",
+    "ver": 20151201,
+    "aaData": [
+        {
+            "url": "/x/mobsrv/homepage0?proxy=intrust",
+            "title": "首页",
+            "id": "T_HOME",
+            "icon": "icon-home"
+        },
+        {
+        	"url": "/x/mobsrv/customer?proxy=webplat",
+            "title": "我的客户",
+            "id": "T_BOOK",
+            "icon": "icon-user"
+        },
+        {
+            "title": "个人中心",
+            "id": "T_CNFG",
+            "icon": "icon-cog"
+        }
+    ],
+    "ret": ""
+}

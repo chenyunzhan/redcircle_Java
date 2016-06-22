@@ -1,0 +1,48 @@
+{
+    "whlCmd": [
+        {
+            "title": "预约",
+            "url": "/x/mobsrv/product/selectContract?proxy=intrust",
+            "id": "BookingVC",
+            "params": {
+                "flowid": "flow_id"
+            },
+            "type": "one",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-circle-arrow-right"
+        }
+    ],
+    "ver": 20151201,
+    "ret": "",
+    "aaData": {
+        "nodes": [
+            {
+                "flow_title": "陈云展",
+                "flow_id": "50"
+            },
+            {
+                "flow_title": "孙佳",
+                "flow_id": "18"
+            },
+            {
+                "flow_title": "张强",
+                "flow_id": "28"
+            },
+            {
+                "flow_title": "李阳",
+                "flow_id": "48"
+            },
+            {
+                "flow_title": "李干",
+                "flow_id": "63"
+            }
+        ],
+        "parallel": false
+    },
+    "colnames": {
+        "id": "flow_id",
+        "title": "flow_title"
+    },
+    "type": "select"
+}

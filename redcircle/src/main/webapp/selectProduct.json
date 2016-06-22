@@ -1,0 +1,48 @@
+{
+    "whlCmd": [
+        {
+            "title": "选择客户",
+            "url": "/x/mobsrv/product/selectCustomer?proxy=intrust",
+            "id": "DynamicSelectViewController",
+            "params": {
+                "productid": "product_id"
+            },
+            "type": "one",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-circle-arrow-right"
+        }
+    ],
+    "ver": 20151201,
+    "ret": "",
+    "aaData": {
+        "nodes": [
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX50号",
+                "product_id": "50"
+            },
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX18号",
+                "product_id": "18"
+            },
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX28号",
+                "product_id": "28"
+            },
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX48号",
+                "product_id": "48"
+            },
+            {
+                "flow_title": "聚盈XXXXXXXXXXXXX63号",
+                "product_id": "63"
+            }
+        ],
+        "parallel": false
+    },
+    "colnames": {
+        "id": "product_id",
+        "title": "flow_title"
+    },
+    "type": "select"
+}

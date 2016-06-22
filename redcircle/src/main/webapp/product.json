@@ -1,0 +1,195 @@
+{
+    "whlCmd": [
+        {
+            "title": "推介产品",
+            "url": "/x/mobsrv/flow/cancreate?proxy=webplat",
+            "id": "CMD_FLOW_CANCREATE",
+            "desc": "发起新的事务",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-plus"
+        },
+        {
+            "title": "存续产品",
+            "url": "/x/mobsrv/flow/cancreate?proxy=webplat",
+            "id": "CMD_FLOW_CANCREATE",
+            "desc": "发起新的事务",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-plus"
+        },
+        {
+            "title": "结束产品",
+            "url": "/x/mobsrv/flow/cancreate?proxy=webplat",
+            "id": "CMD_FLOW_CANCREATE",
+            "desc": "发起新的事务",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-plus"
+        }
+    ],
+    "ver": 20151201,
+    "iTotalRecords": 6,
+    "aaData": [
+        {
+            "last_name": "预期收益率:10%",
+            "create_name": "刘昊",
+            "task_id": "dc882ceee68c11e5af2150e5498642a0",
+            "assignto": "888",
+            "affa_title": "产品名称",
+            "affa_id": "aacff740e5b711e5b9ba50e5498642a0",
+            "node_title": "陈坤-聚盈XXXX16号",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:27:51",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "投资期限:1年",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "预期收益率:10%",
+            "create_name": "刘昊",
+            "task_id": "dc882ceee68c11e5af2150e5498642a0",
+            "assignto": "888",
+            "affa_title": "产品名称",
+            "affa_id": "aacff740e5b711e5b9ba50e5498642a0",
+            "node_title": "陈坤-聚盈XXXX16号",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:27:51",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "投资期限:1年",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "预期收益率:10%",
+            "create_name": "刘昊",
+            "task_id": "dc882ceee68c11e5af2150e5498642a0",
+            "assignto": "888",
+            "affa_title": "产品名称",
+            "affa_id": "aacff740e5b711e5b9ba50e5498642a0",
+            "node_title": "陈坤-聚盈XXXX16号",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:27:51",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "投资期限:1年",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "预期收益率:10%",
+            "create_name": "刘昊",
+            "task_id": "dc882ceee68c11e5af2150e5498642a0",
+            "assignto": "888",
+            "affa_title": "产品名称",
+            "affa_id": "aacff740e5b711e5b9ba50e5498642a0",
+            "node_title": "陈坤-聚盈XXXX16号",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:27:51",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "投资期限:1年",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "预期收益率:10%",
+            "create_name": "刘昊",
+            "task_id": "dc882ceee68c11e5af2150e5498642a0",
+            "assignto": "888",
+            "affa_title": "产品名称",
+            "affa_id": "aacff740e5b711e5b9ba50e5498642a0",
+            "node_title": "陈坤-聚盈XXXX16号",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:27:51",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "投资期限:1年",
+            "icon_cls": "icon-twitter"
+        },
+        {
+            "last_name": "预期收益率:10%",
+            "create_name": "刘昊",
+            "task_id": "dc882ceee68c11e5af2150e5498642a0",
+            "assignto": "888",
+            "affa_title": "产品名称",
+            "affa_id": "aacff740e5b711e5b9ba50e5498642a0",
+            "node_title": "陈坤-聚盈XXXX16号",
+            "create_user": "4202",
+            "node_id": "UA5165705C7E4161A8901B380C2E8F93",
+            "create_time": "2016-03-09 13:27:51",
+            "last_user": "4202",
+            "flow_title": "测试工作流在app中运行",
+            "last_time": "投资期限:1年",
+            "icon_cls": "icon-twitter"
+        }
+    ],
+    "rowCmd": [
+        {
+            "title": "产品详情",
+            "url": "/x/mobsrv/customer/view?proxy=webplat",
+            "id": "ProductDetailsVC",
+            "params": {
+                "dealflag": "dealFlag",
+                "flowid": "flow_id",
+                "nodeid": "node_id",
+                "taskid": "task_id",
+                "affaid": "affa_id"
+            },
+            "type": "tap",
+            "method": "get",
+            "desc": "查看事务详情"
+        },
+        {
+            "title": "处理",
+            "url": "/x/mobsrv/affa/nextnode?proxy=webplat",
+            "id": "CMD_AFFA_SELNEXTNODES",
+            "params": {
+                "flowid": "flow_id",
+                "nodeid": "node_id",
+                "taskid": "task_id"
+            },
+            "type": "one",
+            "method": "get",
+            "present": "2",
+            "icon": "icon-circle-arrow-right"
+        },
+        {
+            "title": "踏步",
+            "url": "/x/mobsrv/task/loop?proxy=webplat",
+            "id": "CMD_AFFA_LOOP_BEFORE",
+            "params": {
+                "dealflag": "dealFlag",
+                "flowid": "flow_id",
+                "nodeid": "node_id",
+                "taskid": "task_id"
+            },
+            "method": "get",
+            "present": "2",
+            "icon": "icon-repeat"
+        },
+        {
+            "title": "关注",
+            "url": "/x/mobsrv/affa/focus?proxy=webplat",
+            "method": "post",
+            "params": {
+                "affaid": "affa_id"
+            },
+            "id": "CMD_AFFA_FOCUS_SUBMIT",
+            "icon": "icon-star"
+        }
+    ],
+    "type": "list",
+    "colnames": {
+        "image": "icon_cls",
+        "desc": "node_title",
+        "sign1": "last_name",
+        "sign2": "last_time",
+        "title": "affa_title"
+    },
+    "ret": ""
+}
