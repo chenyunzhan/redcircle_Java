@@ -39,7 +39,7 @@ public class CommentController {
     
 	@RequestMapping(method = RequestMethod.POST, value = "/addComment")
 	@ResponseBody
-	public String handleFileUpload(@RequestParam("articleId") String articleId,
+	public List<Map<String, Object>> handleFileUpload(@RequestParam("articleId") String articleId,
 									@RequestParam("content") String content,
 									@RequestParam("commentBy") String commentBy,
 									@RequestParam("commentTo") String commentTo) {
@@ -58,10 +58,17 @@ public class CommentController {
 		int result = jdbcTemplate.update("INSERT INTO t_red_comment(id, article_id, content, commenter_by, commenter_to, created_at, updated_at) VALUES (?,?,?,?,?,?,?)", UUID.randomUUID().toString(),articleId, content, commentBy, commentTo, dateStr, dateStr);
 
 		if (result>0) {
-    		return "{\"success\":true, \"msg\":\"添加成功\"}";
+//    		return "{\"success\":true, \"msg\":\"添加成功\"}";
+    		
+			String commentSQL = "select a.*, b.name as commenter_by_name, c.name as commenter_to_name from t_red_comment a left join t_red_user b on a.commenter_by = b.me_phone left join t_red_user c on a.commenter_to = c.me_phone where a.article_id =  ?";
+
+			List<Map<String, Object>> comments = jdbcTemplate.queryForList(commentSQL, new Object[] { articleId });
+			return comments;
 
         } else {
-        	return "{\"success\":false, \"msg\":\"添加失败\"}";
+//        	return "{\"success\":false, \"msg\":\"添加失败\"}";
+        	List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        	return list;
         }
 		
 		
