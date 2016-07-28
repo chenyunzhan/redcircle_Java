@@ -23,7 +23,7 @@ public class ScheduledTasks {
 	
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(cron="0 01 16 * * ?")
+    @Scheduled(cron="0 01 03 * * ?")
     public void reportCurrentTime() {
         System.out.println("The time is now " + dateFormat.format(new Date()));
         
